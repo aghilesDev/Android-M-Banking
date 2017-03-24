@@ -1,10 +1,11 @@
-package com.example.cnep.cnepe_banking;
+package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.cnep.cnepe_banking.Domain.EntityBase;
-import com.example.cnep.cnepe_banking.Repository.TestRepository;
+import com.example.cnep.cnepe_banking.DomainLayer.EntityBase;
+import com.example.cnep.cnepe_banking.R;
+import com.example.cnep.cnepe_banking.DataLayer.TestRepository;
 
 public class MainActivity extends AppCompatActivity {
 

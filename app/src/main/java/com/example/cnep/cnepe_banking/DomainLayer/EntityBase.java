@@ -1,10 +1,10 @@
-package com.example.cnep.cnepe_banking.Domain;
+package com.example.cnep.cnepe_banking.DomainLayer;
 
 /**
  * Created by Aghiles on 2017-03-23.
  */
 
 public abstract class EntityBase {
-    int ID;
+    private int ID;
 
 }
