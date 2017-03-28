@@ -1,7 +1,7 @@
 package com.example.cnep.cnepe_banking.DomainLayer.Repository;
 
 import com.android.internal.util.Predicate;
-import com.example.cnep.cnepe_banking.DomainLayer.EntityBase;
+import com.example.cnep.cnepe_banking.Models.EntityBase;
 
 import java.util.Set;
 

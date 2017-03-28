@@ -1,5 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cnep.cnepe_banking.DomainLayer.EntityBase;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ILoginPresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.LoginPresenter;
 import com.example.cnep.cnepe_banking.R;
-import com.example.cnep.cnepe_banking.DataLayer.TestRepository;
 
 public class MainActivity extends AppCompatActivity implements IloginView{
 
@@ -85,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements IloginView{
     @Override
     public void login() {
         Toast.makeText(getApplicationContext(), "login succeed", Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(MainActivity.this,Accueil.class);
+        intent=presenter.getModels(intent);
+        startActivity(intent);
+        intent.put
 
     }
 

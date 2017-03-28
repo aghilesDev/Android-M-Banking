@@ -30,5 +30,9 @@ public class LoginInteractor implements IloginInteractor {
     @Override
     public void loginCase(String identifiantClient, String email, String motDePasse) {
 
+        if(identifiantClient.equals("juba")&&email.equals("youbazair@gmail.com")&&motDePasse.equals("1234562"))
+            presenter.loginSucced();
+        else
+            presenter.loginFailed();
     }
 }
