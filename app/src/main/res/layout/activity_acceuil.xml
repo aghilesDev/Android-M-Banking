@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context="com.example.cnep.cnepe_banking.PresentationLayer.View.Accueil">
 
+    <Button
+        android:id="@+id/bAgences"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="Agences"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/bComptes"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/bComptes" />
+
+    <Button
+        android:id="@+id/bMaps"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="Agences et dab aux alentours"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/bVirements"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/bVirements" />
+
+    <Button
+        android:id="@+id/bComptes"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="Mes comptes"
+        app:layout_constraintRight_toLeftOf="@+id/bVirements"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.153" />
+
+    <Button
+        android:id="@+id/bVirements"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="Mes virements"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
+package com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces;
 
 import android.content.Intent;
 

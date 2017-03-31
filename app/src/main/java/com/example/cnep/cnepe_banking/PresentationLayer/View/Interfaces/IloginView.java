@@ -1,4 +1,4 @@
-package com.example.cnep.cnepe_banking.PresentationLayer.View;
+package com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces;
 
 /**
  * Created by Aghiles on 2017-03-25.

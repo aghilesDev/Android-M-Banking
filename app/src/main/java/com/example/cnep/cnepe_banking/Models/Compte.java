@@ -16,17 +16,7 @@ public class Compte extends EntityBase {
     public String rib;
     public int clientId;
 
-    public Compte(String compteId, String type, double solde, boolean opposition, String date_Creation, String date_Cloture, String motif_Cloture, String rib, int clientId) {
-        this.compteId = compteId;
-        this.type = type;
-        this.solde = solde;
-        this.opposition = opposition;
-        this.date_Creation = date_Creation;
-        this.date_Cloture = date_Cloture;
-        this.motif_Cloture = motif_Cloture;
-        this.rib = rib;
-        this.clientId = clientId;
-    }
+
 
     public Compte(int ID, String compteId, String type, double solde, boolean opposition, String date_Creation, String date_Cloture, String motif_Cloture, String rib, int clientId) {
         super(ID);

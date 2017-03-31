@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PresentationLayer.View.Accueil"></activity>
+        <activity android:name=".PresentationLayer.View.ListAgenceView"></activity>
+        <activity android:name=".PresentationLayer.View.ListCompteView"></activity>
     </application>
 
 </manifest>

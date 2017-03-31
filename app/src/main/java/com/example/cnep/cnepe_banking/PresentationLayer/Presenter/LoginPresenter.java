@@ -2,10 +2,11 @@ package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 
 import android.content.Intent;
 
-import com.example.cnep.cnepe_banking.DomainLayer.Interactor.IloginInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IloginInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.LoginInteractor;
 import com.example.cnep.cnepe_banking.Models.User;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.IloginView;
+import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.ILoginPresenter;
+import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IloginView;
 
 /**
  * Created by Aghiles on 2017-03-25.
@@ -39,7 +40,7 @@ public class LoginPresenter implements ILoginPresenter {
     public Intent getModels(Intent intent) {
 
         //putExtra des models a envoyer
-        intent.putExtra("user",user);
+        //intent.putExtra("user",user);
         return intent;
     }
 

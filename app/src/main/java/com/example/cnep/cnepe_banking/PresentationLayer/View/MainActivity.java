@@ -10,11 +10,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ILoginPresenter;
+import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.ILoginPresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.LoginPresenter;
+import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IloginView;
 import com.example.cnep.cnepe_banking.R;
 
-public class MainActivity extends AppCompatActivity implements IloginView{
+public class MainActivity extends AppCompatActivity implements IloginView {
 
 
     ILoginPresenter presenter=new LoginPresenter(this);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements IloginView{
         Intent intent=new Intent(MainActivity.this,Accueil.class);
         intent=presenter.getModels(intent);
         startActivity(intent);
-        intent.put
+
 
     }
 
