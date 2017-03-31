@@ -15,7 +15,7 @@ import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.LoginPresenter
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IloginView;
 import com.example.cnep.cnepe_banking.R;
 
-public class MainActivity extends AppCompatActivity implements IloginView {
+public class LoginView extends AppCompatActivity implements IloginView {
 
 
     ILoginPresenter presenter=new LoginPresenter(this);
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements IloginView {
     @Override
     public void login() {
         Toast.makeText(getApplicationContext(), "login succeed", Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MainActivity.this,Accueil.class);
+        Intent intent=new Intent(LoginView.this,Accueil.class);
         intent=presenter.getModels(intent);
         startActivity(intent);
 
