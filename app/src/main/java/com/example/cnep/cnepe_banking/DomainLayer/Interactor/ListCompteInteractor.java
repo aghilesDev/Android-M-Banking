@@ -21,10 +21,10 @@ public class ListCompteInteractor implements IListCompteInteractor {
     public void LoadCompte(int codeAgence) {
         ArrayList<CompteView> comptes=new ArrayList<>();
         comptes.add(new CompteView("0156487952","2495452965949949","EPARGNE",50000));
-        comptes.add(new CompteView("6825283836","9842984849426369","EPARGNE",75000));
+        comptes.add(new CompteView("6825283836","9842984849426369","CHEQUE",75000));
         comptes.add(new CompteView("5818752288","5874754757967979","EPARGNE",25000));
-        comptes.add(new CompteView("9527197512","8638622853266886","EPARGNE",65083));
-        comptes.add(new CompteView("7452949798","4947984479849479","EPARGNE",85649.548));
+        comptes.add(new CompteView("9527197512","8638622853266886","CHEQUE",65083));
+        comptes.add(new CompteView("7452949798","4947984479849479","CHEQUE",85649.548));
         presenter.setComptes(comptes);
     }
 }

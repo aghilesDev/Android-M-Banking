@@ -6,6 +6,7 @@ import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListCom
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ListCompteInteractor;
 import com.example.cnep.cnepe_banking.Models.CompteView;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListComptePresenter;
+import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.CompteAdapter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListCompteView;
 
 import java.util.ArrayList;
@@ -34,5 +35,7 @@ public class ListComptePresenter implements IListComptePresenter {
     public void setComptes(ArrayList<CompteView> comptes) {
 
         //faire l'adapter puis implementer cette methode afin de le transférer à la vue
+        CompteAdapter adapter= new CompteAdapter(context,comptes);
+        view.setAdapter(adapter);
     }
 }
