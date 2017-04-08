@@ -15,11 +15,19 @@ public class Accueil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
-        Button b=(Button)findViewById(R.id.bComptes);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button bCompte=(Button)findViewById(R.id.bComptes);
+        bCompte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it=new Intent(Accueil.this,ListAgenceView.class);
+                startActivity(it);
+            }
+        });
+        Button bCredits=(Button)findViewById(R.id.bCredits);
+        bCredits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(Accueil.this,ListCreditView.class);
                 startActivity(it);
             }
         });

@@ -1,0 +1,114 @@
+package com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.cnep.cnepe_banking.Models.CompteView;
+import com.example.cnep.cnepe_banking.Models.CreditView;
+import com.example.cnep.cnepe_banking.R;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Aghiles on 2017-04-06.
+ */
+
+public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.MyViewHolder> {
+    private ArrayList<CreditView> list;
+    private Context context;
+    public CreditAdapter(Context context,ArrayList<CreditView> credits)
+    {
+        super();
+        this.context=context;
+        this.list=credits;
+    }
+
+
+    public void setList(ArrayList<CreditView> list) {
+        this.list = list;
+    }
+
+    @Override
+    public CreditAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+
+        View view=inflater.inflate(R.layout.credit_cellule,parent,false);
+
+        return new CreditAdapter.MyViewHolder(view,context);
+
+    }
+
+    @Override
+    public void onBindViewHolder(CreditAdapter.MyViewHolder holder, int position) {
+        CreditView compte=list.get(position);
+        holder.display(compte);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+
+
+
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+
+        /*champs*/
+        private TextView numeroDecompte;
+        private TextView montantAccordée;
+        private TextView montantRestant;
+        private TextView datePrelevement;
+        private TextView retardEcheance;
+
+        private CreditView currentCredit;
+        private Context context;
+        public MyViewHolder(final View itemView, final Context context) {
+            super(itemView);
+            numeroDecompte=(TextView) itemView.findViewById(R.id.numeroDeCompte);
+            montantAccordée=(TextView) itemView.findViewById(R.id.MontantAccordé);
+            montantRestant=(TextView) itemView.findViewById(R.id.MontantResatant);
+            datePrelevement=(TextView) itemView.findViewById(R.id.datePrélevement);
+            retardEcheance=(TextView) itemView.findViewById(R.id.retardEchéance);
+
+            this.context=context;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    /*
+                    Intent it=new Intent(context, ListCompteView.class);
+
+                    it.putExtra("codeAgence",currentAgence.getId());
+
+                    context.startActivity(it);
+                    */
+                }
+            });
+        }
+
+        public void display(CreditView credit) {
+            currentCredit=credit;
+            this.numeroDecompte.setText(currentCredit.getCompteId());
+            this.montantAccordée.setText(currentCredit.getMontantAcordé()+"");
+            this.montantRestant.setText(currentCredit.getMontantRestant()+"");
+            this.datePrelevement.setText(currentCredit.getDatePrelevement());
+            this.retardEcheance.setText(currentCredit.getRetard());
+          /*  this.compteId.setText(currentCompte.getCompteId());
+            this.rib.setText(currentCompte.getRib());
+            this.type.setText(currentCompte.getType());
+            this.solde.setText(currentCompte.getSolde()+"");*/
+        }
+    }
+
+
+}
