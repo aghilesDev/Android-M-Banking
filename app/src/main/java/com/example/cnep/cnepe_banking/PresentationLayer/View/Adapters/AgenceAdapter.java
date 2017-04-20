@@ -22,13 +22,19 @@ import java.util.List;
 
 public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHolder> {
 
-    ArrayList<AgenceResumeView> list;
+    ArrayList<AgenceResumeView> list=new ArrayList<>();
     private Context context;
-    public AgenceAdapter(Context context,ArrayList<AgenceResumeView> agences)
+    public AgenceAdapter(Context context)
     {
         super();
         this.context=context;
-        this.list=agences;
+
+    }
+
+    public void addArticles(ArrayList<AgenceResumeView> agences)
+    {
+        this.list.addAll(agences);
+        notifyDataSetChanged();
     }
 
 

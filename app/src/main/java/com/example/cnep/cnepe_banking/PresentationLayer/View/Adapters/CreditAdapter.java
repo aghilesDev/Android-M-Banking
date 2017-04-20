@@ -18,18 +18,18 @@ import java.util.ArrayList;
  */
 
 public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.MyViewHolder> {
-    private ArrayList<CreditView> list;
+    private ArrayList<CreditView> list= new ArrayList<>();
     private Context context;
-    public CreditAdapter(ArrayList<CreditView> credits)
+    public CreditAdapter()
     {
         super();
-        this.context=context;
-        this.list=credits;
+
     }
 
 
-    public void setList(ArrayList<CreditView> list) {
-        this.list = list;
+    public void AddArticles(ArrayList<CreditView> list) {
+        this.list.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override

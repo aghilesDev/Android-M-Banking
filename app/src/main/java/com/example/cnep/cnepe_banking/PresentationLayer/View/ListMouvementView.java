@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.cnep.cnepe_banking.Models.MouvementView;
@@ -35,14 +37,26 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
 
         String compteId=getIntent().getStringExtra("compteId");
         Toast.makeText(getApplicationContext(),"numero de compte: "+compteId,Toast.LENGTH_SHORT);
+        this.adapter=new MouvementAdapter(ListMouvementView.this);
+        rv.setAdapter(adapter);
+
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress2);
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                progress.setVisibility(View.GONE);
+            }
+        });
+
         presenter=new ListMouvementPresenter(this);
         presenter.onIntialRequest("ddd");
     }
 
     @Override
     public void onIntialReponse(ArrayList<MouvementView> mouvements) {
-        this.adapter=new MouvementAdapter(ListMouvementView.this,mouvements);
-        rv.setAdapter(adapter);
+        adapter.onArticlesReceived(mouvements,false);
+
+
 
     }
 }

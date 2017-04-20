@@ -19,8 +19,15 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ListMouvement"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#ECEFF1"
         android:clipChildren="false"
         android:clipToPadding="false" />
+
+    <ProgressBar
+        android:id="@+id/progress2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
 </LinearLayout>

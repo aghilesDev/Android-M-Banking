@@ -22,52 +22,29 @@ import java.util.ArrayList;
  * Created by Aghiles on 2017-03-31.
  */
 
-public class CompteAdapter extends RecyclerView.Adapter<CompteAdapter.MyViewHolder>  {
+public class CompteAdapter extends BaseAdapter<CompteView>  {
 
 
-    private ArrayList<CompteView> list;
     private Context context;
-    public CompteAdapter(Context context,ArrayList<CompteView> comptes)
+    public CompteAdapter(Context context)
     {
         super();
         this.context=context;
-        this.list=comptes;
-    }
-
-
-    public void setList(ArrayList<CompteView> list) {
-        this.list = list;
-    }
-
-    @Override
-    public CompteAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-
-        View view=inflater.inflate(R.layout.compte_cellule,parent,false);
-
-        return new CompteAdapter.MyViewHolder(view,context);
 
     }
 
     @Override
-    public void onBindViewHolder(CompteAdapter.MyViewHolder holder, int position) {
-        CompteView compte=list.get(position);
-        holder.display(compte);
-
+    public int getListItem() {
+        return R.layout.compte_cellule;
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
+    public ArticleViewHolder getNewArticleViewHolder(View view) {
+        return new MyViewHolder(view,context);
     }
 
 
-
-
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends BaseAdapter.ArticleViewHolder<CompteView> {
 
 
         private TextView compteId;

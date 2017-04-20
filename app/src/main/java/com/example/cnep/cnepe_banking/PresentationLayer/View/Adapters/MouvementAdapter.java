@@ -16,48 +16,29 @@ import java.util.ArrayList;
  * Created by Aghiles on 2017-04-19.
  */
 
-public class MouvementAdapter extends RecyclerView.Adapter<MouvementAdapter.MyViewHolder> {
+public class MouvementAdapter extends BaseAdapter<MouvementView> {
 
 
-    ArrayList<MouvementView> list;
     private Context context;
-    public MouvementAdapter(Context context,ArrayList<MouvementView> agences)
+    public MouvementAdapter(Context context)
     {
         super();
         this.context=context;
-        this.list=agences;
-    }
-
-
-    public void setList(ArrayList<MouvementView> list) {
-        this.list = list;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public MouvementAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-
-        View view=inflater.inflate(R.layout.mouvement_cellule,parent,false);
-
-        return new MouvementAdapter.MyViewHolder(view,context);
 
     }
 
     @Override
-    public void onBindViewHolder(MouvementAdapter.MyViewHolder holder, int position) {
-        MouvementView mouvement=list.get(position);
-        holder.display(mouvement);
-
+    public int getListItem() {
+        return R.layout.mouvement_cellule;
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
+    public ArticleViewHolder getNewArticleViewHolder(View view) {
+        return new MyViewHolder(view,context);
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+    public class MyViewHolder extends BaseAdapter.ArticleViewHolder<MouvementView> {
 
         //declaration de champ
         private TextView dateCredit;
@@ -68,22 +49,11 @@ public class MouvementAdapter extends RecyclerView.Adapter<MouvementAdapter.MyVi
         public MyViewHolder(final View itemView, final Context context) {
             super(itemView);
             /*affectation des champ*/
-            this.dateCredit=(TextView)itemView.findViewById(R.id.TDateMouvement);
-            this.intituleCredit=(TextView)itemView.findViewById(R.id.TIntituleMouvement);
-            this.montantCredit=(TextView)itemView.findViewById(R.id.TMontantMouvement);
+            this.dateCredit = (TextView) itemView.findViewById(R.id.TDateMouvement);
+            this.intituleCredit = (TextView) itemView.findViewById(R.id.TIntituleMouvement);
+            this.montantCredit = (TextView) itemView.findViewById(R.id.TMontantMouvement);
 
-            this.context=context;
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                   /* Intent it=new Intent(context, ListCompteView.class);
-
-                    it.putExtra("codeAgence",currentAgence.getId());
-
-                    context.startActivity(it);*/
-                }
-            });
+            this.context = context;
         }
 
         public void display(MouvementView mouvement) {

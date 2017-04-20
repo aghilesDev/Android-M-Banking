@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.cnep.cnepe_banking.Models.CreditView;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractCredits;
@@ -34,6 +36,16 @@ public class ListCreditView extends AppCompatActivity implements IListCreditView
 
         rv=(RecyclerView)findViewById(R.id.listCredits);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new CreditAdapter();
+        rv.setAdapter(adapter);
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress_credits);
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                progress.setVisibility(View.GONE);
+            }
+        });
+
         presenter=new ListCreditPresenter(this);
         presenter.onIntialListRequest();
 
@@ -45,7 +57,6 @@ public class ListCreditView extends AppCompatActivity implements IListCreditView
 
     @Override
     public void onInitialCreditShow(ArrayList<CreditView> credits) {
-        adapter=new CreditAdapter(credits);
-        rv.setAdapter(adapter);
+        adapter.AddArticles(credits);
     }
 }

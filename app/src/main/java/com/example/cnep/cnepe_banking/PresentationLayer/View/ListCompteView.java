@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.cnep.cnepe_banking.Models.CompteView;
@@ -38,6 +40,15 @@ public class ListCompteView extends AppCompatActivity implements ContractComptes
         setTitle("comptes de la "+codeAgence);
         rv=(RecyclerView)findViewById(R.id.ListComptes);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new CompteAdapter(ListCompteView.this);
+        rv.setAdapter(adapter);
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress_comptes);
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                progress.setVisibility(View.GONE);
+            }
+        });
         presenter=new ListComptePresenter(this);
         presenter.onIntialListRequest(codeAgence);
 
@@ -51,8 +62,8 @@ public class ListCompteView extends AppCompatActivity implements ContractComptes
 
     @Override
     public void onInitialCompteShow(ArrayList<CompteView> comptes) {
-        adapter=new CompteAdapter(ListCompteView.this,comptes);
-        rv.setAdapter(adapter);
+
+        adapter.onArticlesReceived(comptes,false);
 
     }
 }

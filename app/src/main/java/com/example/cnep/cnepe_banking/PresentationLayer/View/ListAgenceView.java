@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.example.cnep.cnepe_banking.Models.Agence;
@@ -52,6 +53,16 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
         setTitle("Mes Agences");
         rv=(RecyclerView)findViewById(R.id.List);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new AgenceAdapter(ListAgenceView.this);
+        rv.setAdapter(adapter);
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress_agences);
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                progress.setVisibility(View.GONE);
+            }
+        });
+
         dropdown = (Spinner)findViewById(R.id.spinner);
         Button bRechercher=(Button)findViewById(R.id.bRechercher);
         bRechercher.setOnClickListener(this);
@@ -76,8 +87,8 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
 
     @Override
     public void onInitialAgenceShow(ArrayList<AgenceResumeView> agences,ArrayList<String> wilayas) {
-        adapter=new AgenceAdapter(ListAgenceView.this,agences);
-        rv.setAdapter(adapter);
+
+        adapter.addArticles(agences);
         wilayas.add(0,"Tous");//on ajoute la possibilité d'afficher toutes les agences.
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, wilayas);
         dropdown.setAdapter(adapter);
