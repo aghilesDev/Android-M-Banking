@@ -10,10 +10,10 @@ import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.ILo
 public class LoginInteractor implements IloginInteractor {
 
 
-    ILoginPresenter presenter;
+    CallBack presenter;
 
 
-    public LoginInteractor(ILoginPresenter presenter)
+    public LoginInteractor(CallBack presenter)
     {
         this.presenter=presenter;
     }
@@ -22,18 +22,11 @@ public class LoginInteractor implements IloginInteractor {
     public void loginCase(String identifiantClient, String motDePasse) {
 
         if(identifiantClient.equals("aghiles")&&motDePasse.equals("12345"))
-            presenter.loginSucced();
+            presenter.loginAuthorized();
         else
-            presenter.loginFailed();
+            presenter.loginNotAuthorized();
 
     }
 
-    @Override
-    public void loginCase(String identifiantClient, String email, String motDePasse) {
 
-        if(identifiantClient.equals("juba")&&email.equals("youbazair@gmail.com")&&motDePasse.equals("1234562"))
-            presenter.loginSucced();
-        else
-            presenter.loginFailed();
-    }
 }

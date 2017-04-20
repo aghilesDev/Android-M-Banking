@@ -11,7 +11,9 @@ import android.widget.TextView;
 import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
 import com.example.cnep.cnepe_banking.Models.Compte;
 import com.example.cnep.cnepe_banking.Models.CompteView;
+import com.example.cnep.cnepe_banking.PresentationLayer.View.Accueil;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.ListCompteView;
+import com.example.cnep.cnepe_banking.PresentationLayer.View.ListMouvementView;
 import com.example.cnep.cnepe_banking.R;
 
 import java.util.ArrayList;
@@ -21,10 +23,6 @@ import java.util.ArrayList;
  */
 
 public class CompteAdapter extends RecyclerView.Adapter<CompteAdapter.MyViewHolder>  {
-
-
-
-
 
 
     private ArrayList<CompteView> list;
@@ -90,11 +88,11 @@ public class CompteAdapter extends RecyclerView.Adapter<CompteAdapter.MyViewHold
                 @Override
                 public void onClick(View v) {
 
-                    /*Intent it=new Intent(context, ListCompteView.class);
+                    Intent it=new Intent(context, ListMouvementView.class);
 
-                    it.putExtra("codeAgence",currentAgence.getId());
+                   /* it.putExtra("compteId",currentCompte.getCompteId());*/
 
-                    context.startActivity(it);*/
+                    context.startActivity(it);
                 }
             });
         }

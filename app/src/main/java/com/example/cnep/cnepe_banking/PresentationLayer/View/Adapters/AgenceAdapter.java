@@ -34,6 +34,7 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
 
     public void setList(ArrayList<AgenceResumeView> list) {
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @Override

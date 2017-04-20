@@ -1,77 +1,76 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAgenceInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ListAgenceInteractor;
+import com.example.cnep.cnepe_banking.Models.Agence;
 import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractAgences;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListAgencePresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.AgenceAdapter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListAgenceView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by Aghiles on 2017-03-30.
  */
 
-public class ListAgencePresenter implements IListAgencePresenter {
+public class ListAgencePresenter extends BasePresenter<ContractAgences.View> implements ContractAgences.ActionView,IListAgenceInteractor.CallBack {
 
     private AgenceAdapter adapter;
     private IListAgenceInteractor interactor;
-    private IListAgenceView view;
-    private Context context;
+    ArrayList<AgenceResumeView> agences;
 
-    public ListAgencePresenter(Context context, IListAgenceView view) {
-        this.context = context;
-        this.view = view;
+    public ListAgencePresenter(ContractAgences.View view) {
+
         interactor=new ListAgenceInteractor(this);
+        this.attachView(view);
 
     }
 
-
-//on envoie les demandes à l'interactor
-    @Override
-    public void getWilayas() {
-    interactor.loadWilayas();
-    }
+    //nouvelles version
 
     @Override
-    public void getAgences() {
-
-        interactor.LoadAgences();
-    }
-
-    @Override
-    public void getAgences(String wilaya) {
-    interactor.LoadAgences(wilaya);
-    }
-
-    @Override
-    public void getMoreAgences() {//pas encore implémenter
+    public void onIntialListRequest() {
+        interactor.loadAgencesRequest();
 
     }
 
     @Override
-    public void getMoreAgences(String wilayas) {//pas encore implémenter
-
-    }
-
-    //on reçois les infornation de l'interactor et on affecte les resultats à la view
-
-    @Override
-    public void sendWilayas(ArrayList<String> wilayas) {
-    view.setWilayas(wilayas);
+    public void allAgencesRequest() {
+        this.view.showsAgences(this.agences);
     }
 
     @Override
-    public void sendAgences(ArrayList<AgenceResumeView> agences) {
-           adapter = new AgenceAdapter(context, agences);
-        view.setAdapter(adapter);
+    public void AgencesRequest(String wilaya) {
+        ArrayList<AgenceResumeView> agencesWilaya=new ArrayList<>();
+        for(AgenceResumeView agence:this.agences)
+        {
+            if(agence.getWilaya().equalsIgnoreCase(wilaya))
+                agencesWilaya.add(agence);
+        }
+        this.view.showsAgences(agencesWilaya);
+
     }
 
     @Override
-    public void sendMoreAgences(ArrayList<AgenceResumeView> agences) {
+    public void loadAgencesReponse(ArrayList<AgenceResumeView> agences) {
+        this.agences=agences;
+        HashSet<String> wilayas=new HashSet<>();
+        for(AgenceResumeView agence:this.agences)
+        {
+            wilayas.add(agence.getWilaya());
+        }
+        ArrayList<String> wilayasList= new ArrayList<>();
+        wilayasList.addAll(wilayas);
 
+        this.view.onInitialAgenceShow(agences,wilayasList);
     }
 }

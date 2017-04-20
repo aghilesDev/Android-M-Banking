@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f2f2f2">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_agences"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/colorBackgroundFloating"
+        android:elevation="4dp"
+        android:gravity="center_horizontal"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

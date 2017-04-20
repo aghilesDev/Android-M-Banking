@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.MyViewHolder> {
     private ArrayList<CreditView> list;
     private Context context;
-    public CreditAdapter(Context context,ArrayList<CreditView> credits)
+    public CreditAdapter(ArrayList<CreditView> credits)
     {
         super();
         this.context=context;
@@ -63,7 +63,6 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        /*champs*/
         private TextView numeroDecompte;
         private TextView montantAccordée;
         private TextView montantRestant;
@@ -103,10 +102,7 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.MyViewHold
             this.montantRestant.setText(currentCredit.getMontantRestant()+"");
             this.datePrelevement.setText(currentCredit.getDatePrelevement());
             this.retardEcheance.setText(currentCredit.getRetard());
-          /*  this.compteId.setText(currentCompte.getCompteId());
-            this.rib.setText(currentCompte.getRib());
-            this.type.setText(currentCompte.getType());
-            this.solde.setText(currentCompte.getSolde()+"");*/
+
         }
     }
 

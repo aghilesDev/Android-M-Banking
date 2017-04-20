@@ -12,24 +12,21 @@ import java.util.ArrayList;
 
 public class ListCreditInteractor implements IListCreditInteractor {
 
-    IListCreditPresenter presenter;
+    CallBack presenter;
 
-    public ListCreditInteractor(IListCreditPresenter presenter) {
+    public ListCreditInteractor(CallBack presenter) {
         this.presenter = presenter;
     }
 
     @Override
-    public void LoadCredits(String idUser) {
+    public void LoadCreditsRequest() {
         ArrayList<CreditView> credits=new ArrayList<>();
         credits.add(new CreditView("25","5255220555",58956,45632,"20/10/2014","Aucun"));
         credits.add(new CreditView("266","5255220458",58956,45632,"20/10/2014","Aucun"));
         credits.add(new CreditView("20","548520555",58956,45632,"20/10/2014","Aucun"));
-        presenter.sendCredits(credits);
+        presenter.LoadCreditsReponse(credits);
 
     }
 
-    @Override
-    public void LoadMoreCredits(String idUser) {
 
-    }
 }

@@ -14,9 +14,9 @@ import static com.example.cnep.cnepe_banking.R.layout.agences;
 
 public class ListAgenceInteractor implements IListAgenceInteractor {
 
-    IListAgencePresenter presenter;
+    CallBack presenter;
 
-    public ListAgenceInteractor(IListAgencePresenter presenter) {
+    public ListAgenceInteractor(CallBack presenter) {
         this.presenter = presenter;
     }
 
@@ -27,23 +27,23 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
         villes.add("Boumerdes");
         villes.add("Tizi-Ouzou");
 
-        presenter.sendWilayas(villes);
+        //presenter.sendWilayas(villes);
     }
 
     @Override
     public void LoadAgences() {
         ArrayList<AgenceResumeView> agences=new  ArrayList<>();
-        agences.add(new AgenceResumeView(125,"Alger"));
-        agences.add(new AgenceResumeView(126,"boumerdes"));
-        agences.add(new AgenceResumeView(127,"Tizi-Ouzou"));
-        presenter.sendAgences(agences);
+        agences.add(new AgenceResumeView(125,"Alger","Alger"));
+        agences.add(new AgenceResumeView(126,"boumerdes","Boumerdes"));
+        agences.add(new AgenceResumeView(127,"Tizi-Ouzou","Tizi-Ouzou"));
+       //presenter.sendAgences(agences);
     }
 
     @Override
     public void LoadAgences(String wilaya) {
         ArrayList<AgenceResumeView> agences=new  ArrayList<>();
-        agences.add(new AgenceResumeView(127,"Tizi-Ouzou"));
-        presenter.sendAgences(agences);
+        agences.add(new AgenceResumeView(127,"Tizi-Ouzou","Tizi-Ouzou"));
+       // presenter.sendAgences(agences);
     }
 
     @Override
@@ -54,5 +54,17 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
     @Override
     public void LoadMoreAgences(String wilaya) {
 
+    }
+    //nouveau
+
+    @Override
+    public void loadAgencesRequest() {
+        ArrayList<AgenceResumeView> agences=new  ArrayList<>();
+        agences.add(new AgenceResumeView(125,"Alger","Alger"));
+        agences.add(new AgenceResumeView(124,"Benmhidi2","Alger"));
+        agences.add(new AgenceResumeView(126,"boumerdes","Boumerdes"));
+        agences.add(new AgenceResumeView(128,"Tizi-Ouzou","Tizi-Ouzou"));
+        agences.add(new AgenceResumeView(127,"Benmhidi","Tizi-Ouzou"));
+        presenter.loadAgencesReponse(agences);
     }
 }

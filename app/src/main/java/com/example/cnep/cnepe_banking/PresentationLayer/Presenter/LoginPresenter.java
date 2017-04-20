@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IloginInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.LoginInteractor;
 import com.example.cnep.cnepe_banking.Models.User;
+import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractLogin;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.ILoginPresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IloginView;
 
@@ -12,13 +13,12 @@ import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IloginVi
  * Created by Aghiles on 2017-03-25.
  */
 
-public class LoginPresenter implements ILoginPresenter {
+public class LoginPresenter extends BasePresenter<ContractLogin.View> implements ContractLogin.ActionView,LoginInteractor.CallBack {
 
     private IloginInteractor interactor;
-    private IloginView view;
-    private User user;
 
-    public LoginPresenter(IloginView view)
+
+    public LoginPresenter(ContractLogin.View view)
     {
         this.view=view;
         this.interactor=new LoginInteractor(this);
@@ -31,31 +31,17 @@ public class LoginPresenter implements ILoginPresenter {
         interactor.loginCase(identifiantClient,motDepasse);
     }
 
+
+
     @Override
-    public void attempToLogin(String identifiantClient, String email, String motDepasse) {
-        interactor.loginCase(identifiantClient,email,motDepasse);
+    public void loginAuthorized() {
+        view.loginSucced();
+
     }
 
     @Override
-    public Intent getModels(Intent intent) {
-
-        //putExtra des models a envoyer
-        //intent.putExtra("user",user);
-        return intent;
-    }
-
-    @Override
-    public void loginFailed() {
-        view.loginFail();
-    }
-
-    @Override
-    public void loginSucced() {
-        view.login();
-    }
-
-    @Override
-    public void loginSucceed(User user) {
+    public void loginNotAuthorized() {
+        view.loginFailed();
 
     }
 }

@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 
 public interface IListCreditPresenter {
-    public  void getCredits(String idUser);
-    public void getMoreCredits(String idUser);
+    public  void getCredits();
+    public void getMoreCredits();
     public void sendCredits(ArrayList<CreditView> credits);
     public void sendMoreCredits(ArrayList<CreditView> credits);
 }

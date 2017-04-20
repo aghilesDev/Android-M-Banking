@@ -1,10 +1,19 @@
 package com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces;
 
+import com.example.cnep.cnepe_banking.Models.CompteView;
+
+import java.util.ArrayList;
+
 /**
  * Created by Aghiles on 2017-03-31.
  */
 
 public interface IListCompteInteractor {
 
-    public void LoadCompte(int codeAgence);
+    public void LoadCompteRequest(int codeAgence);
+
+    public interface CallBack
+    {
+        public void  LoadComptesReponse(ArrayList<CompteView> comptes);
+    }
 }

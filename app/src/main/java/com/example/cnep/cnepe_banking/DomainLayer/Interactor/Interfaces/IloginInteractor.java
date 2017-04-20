@@ -7,5 +7,12 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces;
 public interface IloginInteractor {
 
     public void loginCase(String identifiantClient,String motDePasse);
-    public  void loginCase(String identifiantClient,String email,String motDePasse);
+
+
+    public interface CallBack{
+
+        public void loginAuthorized();
+        public void loginNotAuthorized();
+
+    }
 }

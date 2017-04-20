@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="106dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/shape_cadre">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="-7dp"
         android:gravity="center"
         android:text="Montant Accordé:"
         android:textColor="@android:color/black"
@@ -117,8 +118,9 @@
         android:layout_height="20dp"
         android:text="Numéro de compte:"
         android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="3dp" />
+        tools:layout_editor_absoluteY="3dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/numeroDeCompte"
