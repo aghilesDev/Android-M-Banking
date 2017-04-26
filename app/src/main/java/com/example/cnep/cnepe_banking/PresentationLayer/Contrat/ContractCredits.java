@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public interface ContractCredits {
 
-    public interface ActionView
+    public interface ActionView extends ContratLoged.ActionView
     {
         public  void onIntialListRequest();
     }
 
 
-    public interface View
+    public interface View extends ContratLoged.View
     {
         public void onInitialCreditShow(ArrayList<CreditView> credits);
     }

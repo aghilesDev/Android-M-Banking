@@ -69,4 +69,9 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
     public void loginFailed() {
         Toast.makeText(getApplicationContext(), "login failed", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void noConnection() {
+
+    }
 }

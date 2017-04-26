@@ -2,9 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cnep.cnepe_banking">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/log_cnep"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -21,6 +25,8 @@
         <activity android:name=".PresentationLayer.View.ListCompteView" android:screenOrientation="portrait"></activity>
         <activity android:name=".PresentationLayer.View.ListCreditView" android:screenOrientation="portrait"/>
         <activity android:name=".PresentationLayer.View.ListMouvementView" />
+        <activity android:name=".PresentationLayer.View.ListAllAgencesView" />
+        <activity android:name=".PresentationLayer.View.AgenceDetailledView" />
     </application>
 
 </manifest>

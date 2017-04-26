@@ -8,12 +8,14 @@ public class CompteView {
     public String compteId;
     public String rib;
     public String type;
+    public String DateMaj;
     public double solde;
 
-    public CompteView(String compteId, String rib, String type, double solde) {
+    public CompteView(String compteId, String rib, String type,String DateMaj ,double solde) {
         this.compteId = compteId;
         this.rib = rib;
         this.type = type;
+        this.DateMaj=DateMaj;
         this.solde = solde;
     }
 
@@ -31,5 +33,9 @@ public class CompteView {
 
     public double getSolde() {
         return solde;
+    }
+
+    public String getDateMaj() {
+        return DateMaj;
     }
 }

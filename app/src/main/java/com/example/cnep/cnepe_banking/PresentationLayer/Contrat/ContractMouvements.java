@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public interface ContractMouvements {
 
-    public interface ActionView
+    public interface ActionView extends ContratLoged.ActionView
     {
         public void onIntialRequest(String numeroCompte);
     }
-    public interface View
+    public interface View extends ContratLoged.View
     {
         public void onIntialReponse(ArrayList<MouvementView> mouvements);
 

@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * Created by Aghiles on 2017-04-19.
  */
 
-public interface IListMouvementInteractor {
+public interface IListMouvementInteractor extends ILogedInteractor{
     public void loadMouvementsRequest(String numeroCompte);
 
-    public interface CallBack
+    public interface CallBack extends ILogedInteractor.CallBack
     {
         public void loadMouvementsReponse(ArrayList<MouvementView> mouvements);
     }

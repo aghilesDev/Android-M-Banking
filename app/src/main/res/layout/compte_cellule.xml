@@ -3,71 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="155dp"
+    android:layout_height="90dp"
+    android:background="@drawable/shape_cadre"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:background="@drawable/shape_cadre">
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/compteId"
-        android:layout_width="197dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center"
-        android:text="2010784945125155"
+        android:text="000000000000"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/Type" />
 
     <TextView
         android:id="@+id/solde"
-        android:layout_width="298dp"
-        android:layout_height="38dp"
-        android:gravity="center"
-        android:text="5000.25 DA"
-        android:textAlignment="center"
+        android:layout_width="258dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_marginLeft="0dp"
+        android:gravity="center_vertical"
+        android:text="5000000000000.25 DA"
+        android:textAlignment="textEnd"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/compteId" />
+        app:layout_constraintBottom_toBottomOf="@+id/compteId"
+        app:layout_constraintLeft_toRightOf="@+id/compteId"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="125dp"
-        android:layout_height="39dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="-8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="numero de compte:"
+        android:text="Nº"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/compteId"
         app:layout_constraintLeft_toLeftOf="@+id/Type"
         app:layout_constraintTop_toBottomOf="@+id/Type"
-        app:layout_constraintVertical_bias="0.8" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="74dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="Solde:"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/solde"
-        app:layout_constraintLeft_toLeftOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/Type"
-        android:layout_width="368dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="Epargne"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -76,12 +67,13 @@
 
     <TextView
         android:id="@+id/rib"
-        android:layout_width="329dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginLeft="7dp"
         android:layout_marginStart="7dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="00000000000000000000"
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toRightOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/solde" />
@@ -89,13 +81,36 @@
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="-8dp"
         android:gravity="center_vertical"
         android:text="RIB:"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/rib"
-        app:layout_constraintLeft_toLeftOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginLeft="-8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="252dp"
+        android:gravity="center_vertical"
+        android:text="Maj: "
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/DateMajCompte"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/DateMajCompte"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="-7dp"
+        android:gravity="center_vertical"
+        android:text="20/10/2016"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintLeft_toRightOf="@+id/textView6" />
 </android.support.constraint.ConstraintLayout>

@@ -66,34 +66,35 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends BaseAdapter.ArticleViewHolder<AgenceResumeView> implements View.OnClickListener{
         private final TextView codeAgence;
         private final TextView libelléAgence;
-        private AgenceResumeView currentAgence;
-        private Context context;
+        protected AgenceResumeView currentAgence;
+
+        protected Context context;
         public MyViewHolder(final View itemView, final Context context) {
             super(itemView);
             codeAgence=(TextView)itemView.findViewById(R.id.codeAgence);
             libelléAgence=(TextView)itemView.findViewById(R.id.libelléAgence);
 
             this.context=context;
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent it=new Intent(context, ListCompteView.class);
-
-                    it.putExtra("codeAgence",currentAgence.getId());
-
-                    context.startActivity(it);
-                }
-            });
+            itemView.setOnClickListener(this);
         }
 
         public void display(AgenceResumeView agence) {
             currentAgence=agence;
             codeAgence.setText(agence.getId()+"");
             libelléAgence.setText(agence.getLibelle());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent it=new Intent(context, ListCompteView.class);
+
+            it.putExtra("codeAgence",currentAgence.getId());
+
+            context.startActivity(it);
+
         }
     }
 }

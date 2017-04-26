@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public interface ContractComptes {
 
 
-    public interface ActionView
+    public interface ActionView extends ContratLoged.ActionView
     {
         public  void onIntialListRequest(int codeAgence);
     }
 
 
-    public interface View
+    public interface View extends ContratLoged.View
     {
         public void onInitialCompteShow(ArrayList<CompteView> comptes);
     }

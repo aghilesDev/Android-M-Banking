@@ -1,19 +1,23 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Contrat;
 
+
+
 /**
- * Created by Aghiles on 2017-04-19.
+ * Created by Aghiles on 2017-04-23.
  */
 
-public interface ContractLogin {
+public interface ContratLoged{
+
 
     public interface ActionView extends ContratConnected.ActionView
     {
-        public void attempToLogin(String identifiantClient,String motDepasse);
+        public void toLogOut();
     }
 
     public interface View extends ContratConnected.View
     {
-        public void loginSucced();
-        public void loginFailed();
+        public void logOut();
     }
+
+
 }

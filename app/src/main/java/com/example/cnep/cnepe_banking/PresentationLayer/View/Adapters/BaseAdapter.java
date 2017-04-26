@@ -20,7 +20,10 @@ public abstract class BaseAdapter<V>extends RecyclerView.Adapter<RecyclerView.Vi
     private static final int VIEW_TYPE_ARTICLE = 0;
     private static final int VIEW_TYPE_PROGRESS = 1;
 
-    private final ArrayList<V> articles=new ArrayList<>();
+    protected final ArrayList<V> articles=new ArrayList<>();
+    private IArticleSender sender;
+
+
 
 
     private boolean hasMore = false;
@@ -29,6 +32,10 @@ public abstract class BaseAdapter<V>extends RecyclerView.Adapter<RecyclerView.Vi
         super();
     }
 
+    public BaseAdapter(IArticleSender sender) {
+        super();
+        this.sender = sender;
+    }
 
     public abstract int getListItem();
     public abstract ArticleViewHolder getNewArticleViewHolder(View view);
@@ -82,6 +89,13 @@ public abstract class BaseAdapter<V>extends RecyclerView.Adapter<RecyclerView.Vi
 
         if (holder instanceof ArticleViewHolder)
             ((ArticleViewHolder) holder).display(this.articles.get(position));
+        else
+        if(holder instanceof ProgressViewHolder)
+            if(sender!=null)
+            sender.LoadNext();
+            else
+                this.onArticlesReceived(new ArrayList<V>(),false);
+
     }
 
 

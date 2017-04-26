@@ -8,11 +8,11 @@ import java.util.ArrayList;
  * Created by Aghiles on 2017-04-06.
  */
 
-public interface IListCreditInteractor {
+public interface IListCreditInteractor extends ILogedInteractor{
     public void LoadCreditsRequest();
 
 
-    public interface CallBack
+    public interface CallBack extends ILogedInteractor.CallBack
     {
         public void LoadCreditsReponse(ArrayList<CreditView> credits);
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.cnep.cnepe_banking.R;
 
-public class Accueil extends AppCompatActivity {
+public class Accueil extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +26,14 @@ public class Accueil extends AppCompatActivity {
 
 
 
-        bCompte.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it=new Intent(Accueil.this,ListAgenceView.class);
-                startActivity(it);
-            }
-        });
+        bCompte.setOnClickListener(this);
         Button bCredits=(Button)findViewById(R.id.bCredits);
-        bCredits.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it=new Intent(Accueil.this,ListCreditView.class);
-                startActivity(it);
-            }
-        });
+        bCredits.setOnClickListener(this);
+
+
+
+        Button bAgences=(Button)findViewById(R.id.bAgences);
+        bAgences.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +61,23 @@ public class Accueil extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.bComptes)
+        {
+            Intent it=new Intent(Accueil.this,ListAgenceView.class);
+            startActivity(it);
+        }else
+            if(v.getId()==R.id.bCredits)
+            {
+                Intent it=new Intent(Accueil.this,ListCreditView.class);
+                startActivity(it);
+            }
+             else
+                if(v.getId()==R.id.bAgences)
+                {
+                    Intent it=new Intent(Accueil.this,ListAllAgencesView.class);
+                    startActivity(it);
+                }
+    }
 }

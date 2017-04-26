@@ -1,6 +1,7 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.cnep.cnepe_banking.Models.Agence;
 import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
@@ -35,7 +38,7 @@ import java.util.ListIterator;
  * Created by Aghiles on 2017-03-30.
  */
 
-public class ListAgenceView extends AppCompatActivity implements ContractAgences.View,View.OnClickListener {
+public class ListAgenceView extends AppCompatActivity implements ContractAgences.View,AdapterView.OnItemSelectedListener {
 
 
     private  Spinner dropdown;
@@ -43,7 +46,9 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
     private RecyclerView rv;
     private AgenceAdapter adapter;
     private  ContractAgences.ActionView presenter;
-
+    private View search;
+    private Button noConnection;
+    ProgressBar progress;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,43 +60,63 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter=new AgenceAdapter(ListAgenceView.this);
         rv.setAdapter(adapter);
-        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress_agences);
+
+
+        progress = (ProgressBar) findViewById(R.id.progress_agences);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
+
+                rv.setVisibility(View.VISIBLE);
+                noConnection.setVisibility(View.GONE);
                 progress.setVisibility(View.GONE);
+                search.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        search=findViewById(R.id.SeachBarAgences);
+        search.setVisibility(View.GONE);
+        noConnection=(Button)findViewById(R.id.NoConnectionAgences);
+
+        noConnection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialize();
             }
         });
 
         dropdown = (Spinner)findViewById(R.id.spinner);
-        Button bRechercher=(Button)findViewById(R.id.bRechercher);
-        bRechercher.setOnClickListener(this);
+        dropdown.setOnItemSelectedListener(this);
+
 
         presenter=new ListAgencePresenter(this);
+        this.initialize();
+
+    }
+
+
+
+    private  void initialize()
+    {
+        search.setVisibility(View.GONE);
+        rv.setVisibility(View.GONE);
+        noConnection.setVisibility(View.GONE);
+        progress.setVisibility(View.VISIBLE);
         presenter.onIntialListRequest();
 
+
     }
 
-
-
-
-    @Override
-    public void onClick(View v) {
-        willaya=(String)dropdown.getSelectedItem();
-        if(willaya.equalsIgnoreCase("Tous"))//si tout est selectionner on affiche toutes les agences.
-
-            presenter.allAgencesRequest();
-        else
-            presenter.AgencesRequest(willaya);
-    }
 
     @Override
     public void onInitialAgenceShow(ArrayList<AgenceResumeView> agences,ArrayList<String> wilayas) {
 
         adapter.addArticles(agences);
         wilayas.add(0,"Tous");//on ajoute la possibilité d'afficher toutes les agences.
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, wilayas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_customed, wilayas);
         dropdown.setAdapter(adapter);
+
 
     }
 
@@ -102,4 +127,38 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
     }
 
 
+    @Override
+    public void noConnection() {
+        search.setVisibility(View.GONE);
+        rv.setVisibility(View.GONE);
+        noConnection.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void logOut() {
+        Toast.makeText(this,"Votre session n'est plus valide",Toast.LENGTH_SHORT);
+        Intent intent=new Intent(this,LoginView.class);
+        startActivity(intent);
+        finishAffinity();
+
+
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        willaya=(String)dropdown.getSelectedItem();
+        if(willaya.equalsIgnoreCase("Tous"))//si tout est selectionner on affiche toutes les agences.
+
+            presenter.allAgencesRequest();
+        else
+            presenter.AgencesRequest(willaya);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

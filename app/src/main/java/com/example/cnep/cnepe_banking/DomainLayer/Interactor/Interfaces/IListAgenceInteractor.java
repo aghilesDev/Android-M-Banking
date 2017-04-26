@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Aghiles on 2017-03-30.
  */
 
-public interface IListAgenceInteractor {
+public interface IListAgenceInteractor extends ILogedInteractor {
         public void loadWilayas();
         public void LoadAgences();
         public void LoadAgences(String wilaya);
@@ -18,7 +18,7 @@ public interface IListAgenceInteractor {
         public void loadAgencesRequest();
 
 
-    public interface CallBack
+    public interface CallBack extends ILogedInteractor.CallBack
     {
         public void loadAgencesReponse(ArrayList<AgenceResumeView> agences);
     }

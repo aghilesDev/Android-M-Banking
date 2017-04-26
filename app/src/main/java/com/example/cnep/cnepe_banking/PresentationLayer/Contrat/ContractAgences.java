@@ -11,14 +11,14 @@ import java.util.HashSet;
 
 public interface ContractAgences {
 
-    public interface ActionView
+    public interface ActionView extends ContratLoged.ActionView
     {
         public  void onIntialListRequest();
         public void allAgencesRequest();
         public  void AgencesRequest(String wilaya);
     }
 
-    public interface  View
+    public interface  View extends ContratLoged.View
     {
         public void onInitialAgenceShow(ArrayList<AgenceResumeView> agences, ArrayList<String> wilayas);
         public  void showsAgences(ArrayList<AgenceResumeView> agences);

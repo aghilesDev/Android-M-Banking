@@ -33,6 +33,12 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
 
     }
 
+    public CompteAdapter(Context context,IArticleSender sender)
+    {
+        super(sender);
+        this.context=context;
+    }
+
     @Override
     public int getListItem() {
         return R.layout.compte_cellule;
@@ -51,6 +57,7 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
         private TextView rib;
         private TextView type;
         private TextView solde;
+        private TextView DateMaj;
 
         private CompteView currentCompte;
         private Context context;
@@ -60,6 +67,7 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
             this.rib=(TextView)itemView.findViewById(R.id.rib);
             this.type=(TextView)itemView.findViewById(R.id.Type);
             this.solde=(TextView)itemView.findViewById(R.id.solde);
+            this.DateMaj=(TextView)itemView.findViewById(R.id.DateMajCompte);
             this.context=context;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -67,7 +75,7 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
 
                     Intent it=new Intent(context, ListMouvementView.class);
 
-                   /* it.putExtra("compteId",currentCompte.getCompteId());*/
+                   it.putExtra("compteId",currentCompte.getCompteId());
 
                     context.startActivity(it);
                 }
@@ -79,7 +87,8 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
             this.compteId.setText(currentCompte.getCompteId());
             this.rib.setText(currentCompte.getRib());
             this.type.setText(currentCompte.getType());
-           this.solde.setText(currentCompte.getSolde()+"");
+            this.solde.setText(currentCompte.getSolde()+" DZD");
+            this.DateMaj.setText(currentCompte.getDateMaj());
         }
     }
 }

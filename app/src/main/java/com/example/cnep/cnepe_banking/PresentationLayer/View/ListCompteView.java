@@ -1,11 +1,13 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,27 +32,41 @@ public class ListCompteView extends AppCompatActivity implements ContractComptes
     private ContractComptes.ActionView presenter;
     private RecyclerView rv;
     private CompteAdapter adapter;
+    private Button noConnection;
+    private ProgressBar progress;
+
+    private int codeAgence;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comptes);
         Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_comptes);
         setSupportActionBar(toolbar);
-        int codeAgence=getIntent().getIntExtra("codeAgence",0);
+        codeAgence=getIntent().getIntExtra("codeAgence",0);
         setTitle("comptes de la "+codeAgence);
         rv=(RecyclerView)findViewById(R.id.ListComptes);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter=new CompteAdapter(ListCompteView.this);
         rv.setAdapter(adapter);
-        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress_comptes);
+        progress = (ProgressBar) findViewById(R.id.progress_comptes);
+        noConnection=(Button)findViewById(R.id.NoConnectionComptes);
+        noConnection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialize();
+            }
+        });
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 progress.setVisibility(View.GONE);
+                rv.setVisibility(View.VISIBLE);
+                noConnection.setVisibility(View.GONE);
+
             }
         });
         presenter=new ListComptePresenter(this);
-        presenter.onIntialListRequest(codeAgence);
+        initialize();
 
 
 
@@ -59,11 +75,38 @@ public class ListCompteView extends AppCompatActivity implements ContractComptes
 
 
 
+    private  void initialize()
+    {
+
+        rv.setVisibility(View.GONE);
+        noConnection.setVisibility(View.GONE);
+        progress.setVisibility(View.VISIBLE);
+        presenter.onIntialListRequest(codeAgence);;
+
+
+    }
+
 
     @Override
     public void onInitialCompteShow(ArrayList<CompteView> comptes) {
 
         adapter.onArticlesReceived(comptes,false);
 
+    }
+
+    @Override
+    public void noConnection() {
+        rv.setVisibility(View.GONE);
+        noConnection.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void logOut() {
+        Toast.makeText(this,"Votre session n'est plus valide",Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(this,LoginView.class);
+        startActivity(intent);
+        finishAffinity();
     }
 }
