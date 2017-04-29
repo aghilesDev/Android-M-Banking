@@ -46,4 +46,9 @@ public class AgenceResumeView implements Serializable{
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return "id"+id+"\nwilaya"+wilaya+"\nlibelle"+libelle+"\nadresse"+adresse+"\ntelephone"+telephone+"\nemail"+email;
+    }
 }

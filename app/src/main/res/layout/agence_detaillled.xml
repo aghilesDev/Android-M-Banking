@@ -31,10 +31,10 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/cadre_agence"
         android:elevation="3dp"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_agencedetaille">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_agencedetaille"
+        app:layout_constraintHorizontal_bias="0.333">
 
         <TextView
             android:id="@+id/textView21"
@@ -51,13 +51,16 @@
             android:id="@+id/emailAgence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginLeft="44dp"
             android:layout_marginStart="44dp"
             android:text="TextView"
             android:textColor="#444444"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView21"
-            app:layout_constraintLeft_toRightOf="@+id/textView21" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/textView21"
+            app:layout_constraintTop_toTopOf="@+id/textView21"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/telephoneAgence"
@@ -169,47 +172,44 @@
 
     <Button
         android:id="@+id/bMessageAgence"
-        android:layout_width="85dp"
+        android:layout_width="88dp"
         android:layout_height="85dp"
-        android:layout_marginBottom="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/shape_circle_red"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/button_circle_selector"
         android:text="Message"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/bCallAgence"
-        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/bCallAgence"
-        android:layout_width="85dp"
+        android:layout_width="88dp"
         android:layout_height="85dp"
-        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/shape_circle_red"
+        android:background="@drawable/button_circle_selector"
         android:text="Appeller"
         android:textColor="@android:color/background_light"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/bLocationAgence"
-        android:layout_width="85dp"
+        android:layout_width="88dp"
         android:layout_height="85dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/shape_circle_red"
+        android:background="@drawable/button_circle_selector"
         android:text="localiser"
         android:textColor="@android:color/background_light"
-        app:layout_constraintLeft_toRightOf="@+id/bCallAgence"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintRight_toLeftOf="@+id/bMessageAgence"
-        android:layout_marginRight="8dp"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintBottom_toBottomOf="@+id/bCallAgence"
-        android:layout_marginBottom="-18dp" />
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintLeft_toRightOf="@+id/bCallAgence"
+        app:layout_constraintRight_toLeftOf="@+id/bMessageAgence" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"

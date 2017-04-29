@@ -12,7 +12,7 @@
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/button_selector"
         android:text="Agences"
         android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toLeftOf="@+id/bComptes"
@@ -24,7 +24,7 @@
         android:layout_height="115dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/button_selector"
         android:text="Agences et dab aux alentours"
         android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toRightOf="@+id/bAgences"
@@ -34,13 +34,13 @@
         android:id="@+id/bComptes"
         android:layout_width="170dp"
         android:layout_height="115dp"
+        android:layout_marginLeft="-4dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/button_selector"
         android:text="Mes comptes"
         android:textColor="@android:color/background_light"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        android:layout_marginLeft="-4dp"
-        app:layout_constraintLeft_toLeftOf="@+id/button2" />
+        app:layout_constraintLeft_toLeftOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <Button
         android:id="@+id/bCredits"
@@ -48,7 +48,7 @@
         android:layout_height="115dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/button_selector"
         android:text="Mes Crédits"
         android:textColor="@android:color/background_light"
         app:layout_constraintHorizontal_bias="1.0"
@@ -76,25 +76,25 @@
         android:layout_width="350dp"
         android:layout_height="115dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/button_selector"
         android:text="E-Paiement"
         android:textColor="@android:color/background_light"
-        app:layout_constraintTop_toBottomOf="@+id/bAgences"
-        app:layout_constraintLeft_toLeftOf="@+id/bAgences" />
+        app:layout_constraintLeft_toLeftOf="@+id/bAgences"
+        app:layout_constraintTop_toBottomOf="@+id/bAgences" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="350dp"
         android:layout_height="115dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/button_selector"
         android:text="Mon Profil"
         android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_accueille"
-        android:layout_marginStart="5dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_accueille" />
 
 </android.support.constraint.ConstraintLayout>

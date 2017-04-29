@@ -1,6 +1,7 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +34,9 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_user_physique);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_login);
         setSupportActionBar(toolbar);
