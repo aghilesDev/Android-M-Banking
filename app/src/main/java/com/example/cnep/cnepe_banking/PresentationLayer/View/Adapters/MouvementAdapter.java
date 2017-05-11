@@ -1,22 +1,17 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.cnep.cnepe_banking.Models.MouvementView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 import com.example.cnep.cnepe_banking.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by Aghiles on 2017-04-19.
  */
 
-public class MouvementAdapter extends BaseAdapter<MouvementView> {
+public class MouvementAdapter extends BaseAdapter<MouvementViewModel> {
 
 
     private Context context;
@@ -38,13 +33,13 @@ public class MouvementAdapter extends BaseAdapter<MouvementView> {
     }
 
 
-    public class MyViewHolder extends BaseAdapter.ArticleViewHolder<MouvementView> {
+    public class MyViewHolder extends BaseAdapter.ArticleViewHolder<MouvementViewModel> {
 
         //declaration de champ
         private TextView dateCredit;
         private TextView intituleCredit;
         private TextView montantCredit;
-        private MouvementView currentMouvement;
+        private MouvementViewModel currentMouvement;
         private Context context;
         public MyViewHolder(final View itemView, final Context context) {
             super(itemView);
@@ -56,7 +51,7 @@ public class MouvementAdapter extends BaseAdapter<MouvementView> {
             this.context = context;
         }
 
-        public void display(MouvementView mouvement) {
+        public void display(MouvementViewModel mouvement) {
             currentMouvement=mouvement;
             /* affectation contenu*/
             this.dateCredit.setText(this.currentMouvement.getDate());

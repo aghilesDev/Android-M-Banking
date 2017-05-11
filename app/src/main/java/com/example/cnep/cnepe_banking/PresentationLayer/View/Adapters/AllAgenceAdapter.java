@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.AgenceDetailledView;
 import com.example.cnep.cnepe_banking.R;
 
@@ -12,7 +12,7 @@ import com.example.cnep.cnepe_banking.R;
  * Created by Aghiles on 2017-04-24.
  */
 
-public class AllAgenceAdapter extends BaseAdapter<AgenceResumeView> {
+public class AllAgenceAdapter extends BaseAdapter<AgenceViewModel> {
 
     private Context context;
 

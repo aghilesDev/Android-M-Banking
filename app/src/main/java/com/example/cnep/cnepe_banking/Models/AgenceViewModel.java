@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Aghiles on 2017-03-30.
  */
 
-public class AgenceResumeView implements Serializable{
+public class AgenceViewModel implements Serializable{
     private int id;
     private String wilaya;
     private String libelle;
@@ -14,7 +14,7 @@ public class AgenceResumeView implements Serializable{
     private String telephone;
     private String email;
 
-    public AgenceResumeView(int id, String libelle,String wilaya,String adresse,String telephone,String email) {
+    public AgenceViewModel(int id, String libelle, String wilaya, String adresse, String telephone, String email) {
         this.id = id;
         this.wilaya = wilaya;
         this.libelle = libelle;

@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * Created by Aghiles on 2017-04-19.
  */
 
-public class MouvementView{
+public class MouvementViewModel {
 
     private String date;
     private String intitule;
     private float montant;
 
-    public MouvementView(String date, String intitule, float montant) {
+    public MouvementViewModel(String date, String intitule, float montant) {
         this.date = date;
         this.intitule = intitule;
         this.montant = montant;

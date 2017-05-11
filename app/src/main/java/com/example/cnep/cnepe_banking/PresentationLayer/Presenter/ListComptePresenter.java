@@ -5,12 +5,9 @@ import android.content.Context;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListCompteInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ListCompteInteractor;
-import com.example.cnep.cnepe_banking.Models.CompteView;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 import com.example.cnep.cnepe_banking.Models.ConnectionChecker;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractComptes;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListComptePresenter;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.CompteAdapter;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListCompteView;
 
 import java.util.ArrayList;
 
@@ -33,7 +30,7 @@ public class ListComptePresenter extends BasePresenter<ContractComptes.View> imp
 
 
     @Override
-    public void LoadComptesReponse(ArrayList<CompteView> comptes) {
+    public void LoadComptesReponse(ArrayList<CompteViewModel> comptes) {
         view.onInitialCompteShow(comptes);
 
     }

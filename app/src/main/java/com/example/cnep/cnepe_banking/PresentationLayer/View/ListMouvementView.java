@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.cnep.cnepe_banking.Models.MouvementView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractMouvements;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ListMouvementPresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.MouvementAdapter;
@@ -80,7 +80,7 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
     }
 
     @Override
-    public void onIntialReponse(ArrayList<MouvementView> mouvements) {
+    public void onIntialReponse(ArrayList<MouvementViewModel> mouvements) {
         adapter.onArticlesReceived(mouvements,false);
 
 

@@ -1,9 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.CompteAdapter;
-
-import java.util.ArrayList;
 
 /**
  * Created by Aghiles on 2017-03-31.

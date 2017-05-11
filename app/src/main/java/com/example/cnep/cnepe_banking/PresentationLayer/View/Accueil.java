@@ -29,6 +29,8 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener {
         bCompte.setOnClickListener(this);
         Button bCredits=(Button)findViewById(R.id.bCredits);
         bCredits.setOnClickListener(this);
+        Button bProfile=(Button)findViewById(R.id.bProfile);
+        bProfile.setOnClickListener(this);
 
 
 
@@ -46,7 +48,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener {
         builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                finishAffinity();
             }
         });
 
@@ -78,6 +80,11 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener {
                 {
                     Intent it=new Intent(Accueil.this,ListAllAgencesView.class);
                     startActivity(it);
-                }
+                }else
+                    if(v.getId()==R.id.bProfile)
+                    {
+                        Intent it=new Intent(Accueil.this,ProfileView.class);
+                        startActivity(it);
+                    }
     }
 }

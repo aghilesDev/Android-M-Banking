@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Contrat;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public interface ContractComptes {
 
     public interface View extends ContratLoged.View
     {
-        public void onInitialCompteShow(ArrayList<CompteView> comptes);
+        public void onInitialCompteShow(ArrayList<CompteViewModel> comptes);
     }
 
 

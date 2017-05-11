@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces;
 
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 
 import java.util.ArrayList;
 
@@ -17,8 +17,8 @@ public interface IListAllAgencesInteractor extends IConnectedInteractor{
 
     public interface CallBack extends  IConnectedInteractor.CallBack
     {
-        public void toInitialize(ArrayList<AgenceResumeView> agences, ArrayList<String> wilayas,boolean hasMore);
-        public void receiveMoreAgences(ArrayList<AgenceResumeView> agences,boolean hasMore);
+        public void toInitialize(ArrayList<AgenceViewModel> agences, ArrayList<String> wilayas, boolean hasMore);
+        public void receiveMoreAgences(ArrayList<AgenceViewModel> agences, boolean hasMore);
 
     }
 }

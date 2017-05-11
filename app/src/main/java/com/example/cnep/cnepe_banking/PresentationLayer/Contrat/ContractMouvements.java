@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Contrat;
 
-import com.example.cnep.cnepe_banking.Models.MouvementView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public interface ContractMouvements {
     }
     public interface View extends ContratLoged.View
     {
-        public void onIntialReponse(ArrayList<MouvementView> mouvements);
+        public void onIntialReponse(ArrayList<MouvementViewModel> mouvements);
 
     }
 }

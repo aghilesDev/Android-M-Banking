@@ -5,8 +5,7 @@ import android.os.AsyncTask;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListCompteInteractor;
-import com.example.cnep.cnepe_banking.Models.CompteView;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListComptePresenter;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 
 import java.util.ArrayList;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 
 public class ListCompteInteractor implements IListCompteInteractor {
     private CallBack presenter;
-    private ArrayList<CompteView> comptes;
+    private ArrayList<CompteViewModel> comptes;
 
 
     public ListCompteInteractor(CallBack presenter) {
@@ -43,11 +42,11 @@ public class ListCompteInteractor implements IListCompteInteractor {
                     if(false)
                         throw new NotAuthorizedException();
 
-                    comptes.add(new CompteView("0156487952","2495452965949949","EPARGNE","22/04/2017",50000));
-                    comptes.add(new CompteView("6825283836","9842984849426369","CHEQUE","22/04/2017",75000));
-                    comptes.add(new CompteView("5818752288","5874754757967979","EPARGNE","22/04/2017",25000));
-                    comptes.add(new CompteView("9527197512","8638622853266886","CHEQUE","22/04/2017",65083));
-                    comptes.add(new CompteView("7452949798","4947984479849479","CHEQUE","22/04/2017",85649.548));
+                    comptes.add(new CompteViewModel("0156487952","2495452965949949","EPARGNE","22/04/2017",50000,true));
+                    comptes.add(new CompteViewModel("6825283836","9842984849426369","CHEQUE","22/04/2017",75000,false));
+                    comptes.add(new CompteViewModel("5818752288","5874754757967979","EPARGNE","22/04/2017",25000,false));
+                    comptes.add(new CompteViewModel("9527197512","8638622853266886","CHEQUE","22/04/2017",65083,true));
+                    comptes.add(new CompteViewModel("7452949798","4947984479849479","CHEQUE","22/04/2017",85649.548,false));
 
 
                 } catch (InterruptedException e) {

@@ -173,19 +173,20 @@
     <Button
         android:id="@+id/bMessageAgence"
         android:layout_width="88dp"
-        android:layout_height="85dp"
+        android:layout_height="88dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/button_circle_selector"
         android:text="Message"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/bCallAgence"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="0dp" />
 
     <Button
         android:id="@+id/bCallAgence"
         android:layout_width="88dp"
-        android:layout_height="85dp"
+        android:layout_height="88dp"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
@@ -198,7 +199,7 @@
     <Button
         android:id="@+id/bLocationAgence"
         android:layout_width="88dp"
-        android:layout_height="85dp"
+        android:layout_height="88dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -207,9 +208,9 @@
         android:text="localiser"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/bCallAgence"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintLeft_toRightOf="@+id/bCallAgence"
-        app:layout_constraintRight_toLeftOf="@+id/bMessageAgence" />
+        app:layout_constraintRight_toLeftOf="@+id/bMessageAgence"
+        android:layout_marginBottom="0dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -219,6 +220,33 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="20dp" />
+
+    <Button
+        android:id="@+id/NoConnectionAgence"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#efe8e8"
+        android:text="No Connection"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="30sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_agence"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

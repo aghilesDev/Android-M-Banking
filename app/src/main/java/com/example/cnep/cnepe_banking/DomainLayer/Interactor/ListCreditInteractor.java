@@ -39,7 +39,7 @@ public class ListCreditInteractor implements IListCreditInteractor {
 
                 try {
                     Thread.sleep(2000);
-                    if(!presenter.isConnected())
+                    if(false)
                         throw new NoConnectionException();
                     if(false)
                         throw new NotAuthorizedException();

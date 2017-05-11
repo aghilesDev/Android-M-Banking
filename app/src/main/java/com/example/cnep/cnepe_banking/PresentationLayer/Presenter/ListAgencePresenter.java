@@ -1,24 +1,19 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAgenceInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ListAgenceInteractor;
-import com.example.cnep.cnepe_banking.Models.Agence;
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.Models.ConnectionChecker;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractAgences;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListAgencePresenter;
+
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.AgenceAdapter;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListAgenceView;
+
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by Aghiles on 2017-03-30.
@@ -28,7 +23,7 @@ public class ListAgencePresenter extends BasePresenter<ContractAgences.View> imp
 
     private AgenceAdapter adapter;
     private IListAgenceInteractor interactor;
-    private ArrayList<AgenceResumeView> agences;
+    private ArrayList<AgenceViewModel> agences;
     private ConnectionChecker connectionChecker;
 
 
@@ -55,8 +50,8 @@ public class ListAgencePresenter extends BasePresenter<ContractAgences.View> imp
 
     @Override
     public void AgencesRequest(String wilaya) {
-        ArrayList<AgenceResumeView> agencesWilaya=new ArrayList<>();
-        for(AgenceResumeView agence:this.agences)
+        ArrayList<AgenceViewModel> agencesWilaya=new ArrayList<>();
+        for(AgenceViewModel agence:this.agences)
         {
             if(agence.getWilaya().equalsIgnoreCase(wilaya))
                 agencesWilaya.add(agence);
@@ -66,10 +61,10 @@ public class ListAgencePresenter extends BasePresenter<ContractAgences.View> imp
     }
 
     @Override
-    public void loadAgencesReponse(ArrayList<AgenceResumeView> agences) {
+    public void loadAgencesReponse(ArrayList<AgenceViewModel> agences) {
         this.agences=agences;
         HashSet<String> wilayas=new HashSet<>();
-        for(AgenceResumeView agence:this.agences)
+        for(AgenceViewModel agence:this.agences)
         {
             wilayas.add(agence.getWilaya());
         }

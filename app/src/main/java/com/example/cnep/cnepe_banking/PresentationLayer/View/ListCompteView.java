@@ -11,14 +11,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
-import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractAgences;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractComptes;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListComptePresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ListComptePresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.CompteAdapter;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListAgenceView;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListCompteView;
 import com.example.cnep.cnepe_banking.R;
 
 import java.util.ArrayList;
@@ -88,7 +84,7 @@ public class ListCompteView extends AppCompatActivity implements ContractComptes
 
 
     @Override
-    public void onInitialCompteShow(ArrayList<CompteView> comptes) {
+    public void onInitialCompteShow(ArrayList<CompteViewModel> comptes) {
 
         adapter.onArticlesReceived(comptes,false);
 

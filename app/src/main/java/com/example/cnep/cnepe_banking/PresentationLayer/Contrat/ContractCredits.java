@@ -1,6 +1,5 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Contrat;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
 import com.example.cnep.cnepe_banking.Models.CreditView;
 
 import java.util.ArrayList;

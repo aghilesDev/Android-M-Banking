@@ -8,13 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.ListCompteView;
 import com.example.cnep.cnepe_banking.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Aghiles on 2017-03-30.
@@ -22,7 +20,7 @@ import java.util.List;
 
 public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHolder> {
 
-    ArrayList<AgenceResumeView> list=new ArrayList<>();
+    ArrayList<AgenceViewModel> list=new ArrayList<>();
     private Context context;
     public AgenceAdapter(Context context)
     {
@@ -31,14 +29,14 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
 
     }
 
-    public void addArticles(ArrayList<AgenceResumeView> agences)
+    public void addArticles(ArrayList<AgenceViewModel> agences)
     {
         this.list.addAll(agences);
         notifyDataSetChanged();
     }
 
 
-    public void setList(ArrayList<AgenceResumeView> list) {
+    public void setList(ArrayList<AgenceViewModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -56,7 +54,7 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        AgenceResumeView agence=list.get(position);
+        AgenceViewModel agence=list.get(position);
         holder.display(agence);
 
     }
@@ -66,10 +64,10 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
         return list.size();
     }
 
-    public static class MyViewHolder extends BaseAdapter.ArticleViewHolder<AgenceResumeView> implements View.OnClickListener{
+    public static class MyViewHolder extends BaseAdapter.ArticleViewHolder<AgenceViewModel> implements View.OnClickListener{
         private final TextView codeAgence;
         private final TextView libelléAgence;
-        protected AgenceResumeView currentAgence;
+        protected AgenceViewModel currentAgence;
 
         protected Context context;
         public MyViewHolder(final View itemView, final Context context) {
@@ -81,7 +79,7 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
             itemView.setOnClickListener(this);
         }
 
-        public void display(AgenceResumeView agence) {
+        public void display(AgenceViewModel agence) {
             currentAgence=agence;
             codeAgence.setText(agence.getId()+"");
             libelléAgence.setText(agence.getLibelle());

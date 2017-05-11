@@ -2,9 +2,8 @@ package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAllAgencesInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ListAllAgencesInteractor;
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContratAllAgences;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.BaseAdapter;
 
 import java.util.ArrayList;
 
@@ -48,14 +47,14 @@ public class ListAllAgencesPresenter extends BasePresenter<ContratAllAgences.Vie
     }
 
     @Override
-    public void toInitialize(ArrayList<AgenceResumeView> agences, ArrayList<String> wilayas,boolean hasMore) {
+    public void toInitialize(ArrayList<AgenceViewModel> agences, ArrayList<String> wilayas, boolean hasMore) {
         wilayas.add(0,"Tous");//on ajoute la possibilité d'afficher toutes les agences.
         view.Initializing(agences,wilayas,hasMore);
 
     }
 
     @Override
-    public void receiveMoreAgences(ArrayList<AgenceResumeView> agences,boolean hasMore) {
+    public void receiveMoreAgences(ArrayList<AgenceViewModel> agences, boolean hasMore) {
         view.showMoreAgences(agences,hasMore);
 
     }

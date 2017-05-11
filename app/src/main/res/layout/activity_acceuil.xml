@@ -39,8 +39,8 @@
         android:background="@drawable/button_selector"
         android:text="Mes comptes"
         android:textColor="@android:color/background_light"
-        app:layout_constraintLeft_toLeftOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintLeft_toLeftOf="@+id/bProfile"
+        app:layout_constraintTop_toBottomOf="@+id/bProfile" />
 
     <Button
         android:id="@+id/bCredits"
@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/bAgences" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bProfile"
         android:layout_width="350dp"
         android:layout_height="115dp"
         android:layout_marginLeft="5dp"

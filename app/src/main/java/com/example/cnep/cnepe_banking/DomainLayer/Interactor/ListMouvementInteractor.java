@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListMouvementInteractor;
-import com.example.cnep.cnepe_banking.Models.MouvementView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ListMouvementInteractor implements IListMouvementInteractor{
 
     private CallBack presenter;
-    private ArrayList<MouvementView> mouvements;
+    private ArrayList<MouvementViewModel> mouvements;
 
 
     public ListMouvementInteractor(CallBack presenter) {
@@ -42,10 +42,10 @@ public class ListMouvementInteractor implements IListMouvementInteractor{
                     if(false)
                         throw new NotAuthorizedException();
 
-                    mouvements.add(new MouvementView("20/04/2017","virement",54651));
-                    mouvements.add(new MouvementView("15/03/2017","virement",59651));
-                    mouvements.add(new MouvementView("07/11/2016","virement",98496));
-                    mouvements.add(new MouvementView("20/10/2016","virement",98498));
+                    mouvements.add(new MouvementViewModel("20/04/2017","virement",54651));
+                    mouvements.add(new MouvementViewModel("15/03/2017","virement",59651));
+                    mouvements.add(new MouvementViewModel("07/11/2016","virement",98496));
+                    mouvements.add(new MouvementViewModel("20/10/2016","virement",98498));
 
 
                 } catch (InterruptedException e) {

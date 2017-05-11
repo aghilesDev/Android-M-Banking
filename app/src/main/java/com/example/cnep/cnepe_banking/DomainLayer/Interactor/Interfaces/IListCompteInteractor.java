@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,6 @@ public interface IListCompteInteractor extends ILogedInteractor{
 
     public interface CallBack extends ILogedInteractor.CallBack
     {
-        public void  LoadComptesReponse(ArrayList<CompteView> comptes);
+        public void  LoadComptesReponse(ArrayList<CompteViewModel> comptes);
     }
 }

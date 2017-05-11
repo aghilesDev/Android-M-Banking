@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Contrat;
 
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 
 import java.util.ArrayList;
 
@@ -18,8 +18,8 @@ public interface ContratAllAgences {
 
     public interface View extends ContratConnected.View
     {
-        public void Initializing(ArrayList<AgenceResumeView> agences,ArrayList<String> wilayas,boolean hasMore);
-        public void showMoreAgences(ArrayList<AgenceResumeView> agences,boolean hasMore);
+        public void Initializing(ArrayList<AgenceViewModel> agences, ArrayList<String> wilayas, boolean hasMore);
+        public void showMoreAgences(ArrayList<AgenceViewModel> agences, boolean hasMore);
     }
 
 

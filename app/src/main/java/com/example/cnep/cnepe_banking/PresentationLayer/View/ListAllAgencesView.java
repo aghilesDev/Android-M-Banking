@@ -1,7 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +12,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
-import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractAgences;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContratAllAgences;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ListAgencePresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ListAllAgencesPresenter;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.AgenceAdapter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.AllAgenceAdapter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.IArticleSender;
 import com.example.cnep.cnepe_banking.R;
@@ -48,7 +44,7 @@ public class ListAllAgencesView extends AppCompatActivity implements ContratAllA
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.agences);
-        Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_agences);
+        Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
         setTitle("Agences");
         rv=(RecyclerView)findViewById(R.id.List);
@@ -125,7 +121,7 @@ public class ListAllAgencesView extends AppCompatActivity implements ContratAllA
     }
 
     @Override
-    public void Initializing(ArrayList<AgenceResumeView> agences, ArrayList<String> wilayas,boolean hasMore) {
+    public void Initializing(ArrayList<AgenceViewModel> agences, ArrayList<String> wilayas, boolean hasMore) {
         adapter.onArticlesReceived(agences,hasMore);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.spinner_customed, wilayas);
@@ -135,7 +131,7 @@ public class ListAllAgencesView extends AppCompatActivity implements ContratAllA
     }
 
     @Override
-    public void showMoreAgences(ArrayList<AgenceResumeView> agences,boolean hasMore) {
+    public void showMoreAgences(ArrayList<AgenceViewModel> agences, boolean hasMore) {
 
 
         adapter.onArticlesReceived(agences,hasMore);

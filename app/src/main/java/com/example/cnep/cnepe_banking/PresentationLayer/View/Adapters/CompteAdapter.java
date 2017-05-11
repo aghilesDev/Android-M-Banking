@@ -2,27 +2,19 @@ package com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
-import com.example.cnep.cnepe_banking.Models.Compte;
-import com.example.cnep.cnepe_banking.Models.CompteView;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Accueil;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.ListCompteView;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.ListMouvementView;
-import com.example.cnep.cnepe_banking.R;
 
-import java.util.ArrayList;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
+import com.example.cnep.cnepe_banking.PresentationLayer.View.CompteDetailledView;
+import com.example.cnep.cnepe_banking.R;
 
 /**
  * Created by Aghiles on 2017-03-31.
  */
 
-public class CompteAdapter extends BaseAdapter<CompteView>  {
+public class CompteAdapter extends BaseAdapter<CompteViewModel>  {
 
 
     private Context context;
@@ -50,7 +42,7 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
     }
 
 
-    public class MyViewHolder extends BaseAdapter.ArticleViewHolder<CompteView> {
+    public class MyViewHolder extends BaseAdapter.ArticleViewHolder<CompteViewModel> {
 
 
         private TextView compteId;
@@ -59,7 +51,7 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
         private TextView solde;
         private TextView DateMaj;
 
-        private CompteView currentCompte;
+        private CompteViewModel currentCompte;
         private Context context;
         public MyViewHolder(final View itemView, final Context context) {
             super(itemView);
@@ -73,16 +65,16 @@ public class CompteAdapter extends BaseAdapter<CompteView>  {
                 @Override
                 public void onClick(View v) {
 
-                    Intent it=new Intent(context, ListMouvementView.class);
+                    Intent it=new Intent(context, CompteDetailledView.class);
 
-                   it.putExtra("compteId",currentCompte.getCompteId());
+                   it.putExtra("compte",currentCompte);
 
                     context.startActivity(it);
                 }
             });
         }
 
-        public void display(CompteView Compte) {
+        public void display(CompteViewModel Compte) {
             currentCompte=Compte;
             this.compteId.setText(currentCompte.getCompteId());
             this.rib.setText(currentCompte.getRib());

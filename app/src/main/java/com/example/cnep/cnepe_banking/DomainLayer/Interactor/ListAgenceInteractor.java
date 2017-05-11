@@ -5,12 +5,9 @@ import android.os.AsyncTask;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAgenceInteractor;
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListAgencePresenter;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 
 import java.util.ArrayList;
-
-import static com.example.cnep.cnepe_banking.R.layout.agences;
 
 /**
  * Created by Aghiles on 2017-03-30.
@@ -19,7 +16,7 @@ import static com.example.cnep.cnepe_banking.R.layout.agences;
 public class ListAgenceInteractor implements IListAgenceInteractor {
 
     private CallBack presenter;
-    private ArrayList<AgenceResumeView> agences;
+    private ArrayList<AgenceViewModel> agences;
 
 
 
@@ -39,17 +36,17 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
 
     @Override
     public void LoadAgences() {
-        ArrayList<AgenceResumeView> agences=new  ArrayList<>();
-        agences.add(new AgenceResumeView(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-        agences.add(new AgenceResumeView(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-        agences.add(new AgenceResumeView(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+        ArrayList<AgenceViewModel> agences=new  ArrayList<>();
+        agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+        agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+        agences.add(new AgenceViewModel(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
        //presenter.sendAgences(agences);
     }
 
     @Override
     public void LoadAgences(String wilaya) {
-        ArrayList<AgenceResumeView> agences=new  ArrayList<>();
-        agences.add(new AgenceResumeView(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+        ArrayList<AgenceViewModel> agences=new  ArrayList<>();
+        agences.add(new AgenceViewModel(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
        // presenter.sendAgences(agences);
     }
 
@@ -87,11 +84,11 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
                     if(false)
                         throw new NotAuthorizedException();
 
-                    agences.add(new AgenceResumeView(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceResumeView(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceResumeView(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceResumeView(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceResumeView(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
 
 
                 } catch (InterruptedException e) {

@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 
 import java.util.ArrayList;
 
@@ -11,5 +11,5 @@ import java.util.ArrayList;
 public interface IListComptePresenter {
 
     public void getComptes(int codeAgence);
-    public void setComptes(ArrayList<CompteView> comptes);
+    public void setComptes(ArrayList<CompteViewModel> comptes);
 }

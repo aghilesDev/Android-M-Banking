@@ -1,6 +1,6 @@
 package com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces;
 
-import com.example.cnep.cnepe_banking.Models.MouvementView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,6 @@ public interface IListMouvementInteractor extends ILogedInteractor{
 
     public interface CallBack extends ILogedInteractor.CallBack
     {
-        public void loadMouvementsReponse(ArrayList<MouvementView> mouvements);
+        public void loadMouvementsReponse(ArrayList<MouvementViewModel> mouvements);
     }
 }

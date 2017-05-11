@@ -3,10 +3,9 @@ package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 import android.app.Activity;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListMouvementInteractor;
-import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IloginInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ListMouvementInteractor;
 import com.example.cnep.cnepe_banking.Models.ConnectionChecker;
-import com.example.cnep.cnepe_banking.Models.MouvementView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractMouvements;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class ListMouvementPresenter extends BasePresenter<ContractMouvements.Vie
     }
 
     @Override
-    public void loadMouvementsReponse(ArrayList<MouvementView> mouvements) {
+    public void loadMouvementsReponse(ArrayList<MouvementViewModel> mouvements) {
 
         view.onIntialReponse(mouvements);
 

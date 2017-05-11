@@ -8,40 +8,57 @@ import java.util.Collection;
  * Created by Aghiles on 2017-03-26.
  */
 
-public abstract class User extends EntityBase {
+public abstract class User  {
 
     private String userId;
-    private String type ;
+    private int type ;
+    private String email;
     private String telephone;
+    private String adresse;
 
-    public User(int ID, String userId, String type, String telephone) {
-        super(ID);
+
+    public static final int PARTICULIER=1;
+    public static final int MORAL=2;
+    public static final int PROFESSIONNEL=3;
+
+
+    public User(String userId, int type, String email, String telephone, String adresse) {
         this.userId = userId;
         this.type = type;
+        this.email = email;
         this.telephone = telephone;
+        this.adresse = adresse;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getEmail() {
+        return email;
     }
 
     public String getTelephone() {
         return telephone;
     }
 
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 }

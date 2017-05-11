@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.cnep.cnepe_banking.Models.CompteView;
 import com.example.cnep.cnepe_banking.Models.CreditView;
 import com.example.cnep.cnepe_banking.R;
 

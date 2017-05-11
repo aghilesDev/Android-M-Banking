@@ -1,11 +1,8 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,22 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.cnep.cnepe_banking.Models.Agence;
-import com.example.cnep.cnepe_banking.Models.AgenceResumeView;
+
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractAgences;
-import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListAgencePresenter;
+
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.ListAgencePresenter;
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Adapters.AgenceAdapter;
-import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IListAgenceView;
 import com.example.cnep.cnepe_banking.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created by Aghiles on 2017-03-30.
@@ -53,7 +43,7 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agences);
-        Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_agences);
+        Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
         setTitle("Mes Agences");
         rv=(RecyclerView)findViewById(R.id.List);
@@ -110,7 +100,7 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
 
 
     @Override
-    public void onInitialAgenceShow(ArrayList<AgenceResumeView> agences,ArrayList<String> wilayas) {
+    public void onInitialAgenceShow(ArrayList<AgenceViewModel> agences, ArrayList<String> wilayas) {
 
         adapter.addArticles(agences);
         wilayas.add(0,"Tous");//on ajoute la possibilité d'afficher toutes les agences.
@@ -121,7 +111,7 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
     }
 
     @Override
-    public void showsAgences(ArrayList<AgenceResumeView> agences) {
+    public void showsAgences(ArrayList<AgenceViewModel> agences) {
         adapter.setList(agences);
 
     }
