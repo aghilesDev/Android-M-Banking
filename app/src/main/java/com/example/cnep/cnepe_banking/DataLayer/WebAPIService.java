@@ -1,0 +1,256 @@
+package com.example.cnep.cnepe_banking.DataLayer;
+
+import android.util.Log;
+import android.widget.Switch;
+
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.MotDePasseInvalideException;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
+import com.example.cnep.cnepe_banking.Models.CompteViewModel;
+import com.example.cnep.cnepe_banking.Models.CreditView;
+import com.example.cnep.cnepe_banking.Models.RequestChangementEmail;
+import com.example.cnep.cnepe_banking.Models.RequestChangementMotDePasse;
+import com.example.cnep.cnepe_banking.Models.RequestChangementTelephone;
+import com.example.cnep.cnepe_banking.Models.RequestLogin;
+import com.example.cnep.cnepe_banking.Models.ResponseLogin;
+import com.example.cnep.cnepe_banking.Models.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+/**
+ * Created by Aghiles on 2017-05-14.
+ */
+
+public class WebAPIService implements IService {
+
+    private static WebAPIService instance;
+    private ResponseLogin logInformation;
+    private String baseUrl="http://192.168.43.208:5454/api";
+    private static MediaType JSON=MediaType.parse("application/json; charset=utf-8");
+    private WebAPIService() {
+        logInformation= new ResponseLogin("");
+    }
+
+
+    public static WebAPIService getInstance() {
+        if(instance==null)
+            instance=new WebAPIService();
+        return instance;
+    }
+
+    private Request.Builder TokenRequestBuilder()
+    {return new Request.Builder().header("Authorization","bearer "+logInformation.getAccess_token());}
+
+
+    private String getUrl(String suffix)
+    {
+        return baseUrl+suffix;
+    }
+
+
+
+    @Override
+    public ArrayList<CompteViewModel> getUserComptes() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        return null;
+    }
+
+    @Override
+    public CompteViewModel getCompte(String rib) throws NoConnectionException, NotAuthorizedException, ErrorException {
+
+
+
+        return null;
+    }
+
+    @Override
+    public AgenceViewModel getAllAgences() throws NoConnectionException, ErrorException {
+
+        OkHttpClient client=new OkHttpClient();
+        Request request= new Request.Builder()
+                .url(getUrl("Agence/all"))
+                .build();
+        Response response=null;
+        try {
+            response= client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new NoConnectionException();
+        }
+        switch (response.code())
+        {
+            case 200:{break;}
+            case 404:{
+                throw  new NoConnectionException();
+            }
+            default:{
+                throw new ErrorException();
+            }
+        }
+
+
+
+        Gson gson= new Gson();
+        AgenceViewModel agenceViewModel=null;
+        try {
+            agenceViewModel=(AgenceViewModel)gson.fromJson(response.body().string(),AgenceViewModel.class);
+            System.out.println(agenceViewModel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return agenceViewModel;
+    }
+
+    @Override
+    public AgenceViewModel getAllAgences(String wilaya) throws NoConnectionException, ErrorException {
+        return null;
+    }
+
+    @Override
+    public AgenceViewModel getUserAgences() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        return null;
+    }
+
+    @Override
+    public AgenceViewModel getAgence(int codeAgence) throws NoConnectionException, ErrorException {
+
+
+        OkHttpClient client=new OkHttpClient();
+        Request request= new Request.Builder()
+                .url(getUrl("Agence/"+codeAgence))
+                .build();
+        Response response=null;
+        try {
+            response= client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new NoConnectionException();
+        }
+        switch (response.code())
+        {
+            case 200:{break;}
+            case 404:{
+                throw  new NoConnectionException();
+            }
+            default:{
+                throw new ErrorException();
+            }
+        }
+
+        Gson gson= new Gson();
+        AgenceViewModel agenceViewModel=null;
+        try {
+            agenceViewModel=(AgenceViewModel)gson.fromJson(response.body().string(),AgenceViewModel.class);
+            System.out.println(agenceViewModel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return agenceViewModel;
+    }
+
+    @Override
+    public CreditView getCredits() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        return null;
+    }
+
+    @Override
+    public User getProfile() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        return null;
+    }
+
+    @Override
+    public int postRequestCheque(String motPasse) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+        return 0;
+    }
+
+    @Override
+    public int postRequestChangeEmail(RequestChangementEmail request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+        return 0;
+    }
+
+    @Override
+    public int postRequestChangeTelephone(RequestChangementTelephone request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+        return 0;
+    }
+
+    @Override
+    public int postRequestChangeMotDePasse(RequestChangementMotDePasse request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+        return 0;
+    }
+
+    @Override
+    public ResponseLogin postRequestLogIn(RequestLogin requestLogin) throws NoConnectionException, MotDePasseInvalideException, ErrorException {
+
+        OkHttpClient client= new OkHttpClient();
+
+
+
+
+        RequestBody body= new FormEncodingBuilder()
+                .add("username", requestLogin.getIdentifiant())
+                .add("password", requestLogin.getMotDePasse())
+                .add("grant_type","password")
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://192.168.43.208:5454/token")
+                .header("Content-Type","application/x-www-form-urlencoded")
+                .post(body)
+                .build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            throw  new NoConnectionException();
+        }
+
+        switch (response.code())
+        {
+            case 200:{
+                break;
+            }
+            case 401:{
+                throw new MotDePasseInvalideException();
+            }
+            case 404:{
+
+                throw  new NoConnectionException();
+            }
+            default:
+            {
+                throw  new ErrorException();
+            }
+        }
+
+        Gson gson= new Gson();
+
+        try {
+            logInformation=(ResponseLogin)gson.fromJson(response.body().string(),ResponseLogin.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.i("token",logInformation.getAccess_token());
+
+
+        return null;
+    }
+
+    @Override
+    public int postRequestLogOut() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        return 0;
+    }
+}

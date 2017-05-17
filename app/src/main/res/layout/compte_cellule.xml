@@ -75,6 +75,7 @@
         android:gravity="center"
         android:text="00000000000000000000"
         android:textColor="@android:color/black"
+        android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/solde" />
 
@@ -83,11 +84,12 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginBottom="-8dp"
+        android:layout_marginLeft="-8dp"
         android:gravity="center_vertical"
         android:text="RIB:"
         android:textColor="@android:color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/rib"
-        android:layout_marginLeft="-8dp"
         app:layout_constraintLeft_toLeftOf="@+id/textView7" />
 
     <TextView
@@ -99,6 +101,7 @@
         android:gravity="center_vertical"
         android:text="Maj: "
         android:textColor="@android:color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/DateMajCompte"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -111,6 +114,7 @@
         android:gravity="center_vertical"
         android:text="20/10/2016"
         android:textColor="@android:color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintLeft_toRightOf="@+id/textView6" />
 </android.support.constraint.ConstraintLayout>

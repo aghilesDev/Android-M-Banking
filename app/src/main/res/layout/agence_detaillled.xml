@@ -200,6 +200,7 @@
         android:id="@+id/bLocationAgence"
         android:layout_width="88dp"
         android:layout_height="88dp"
+        android:layout_marginBottom="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -207,10 +208,10 @@
         android:background="@drawable/button_circle_selector"
         android:text="localiser"
         android:textColor="@android:color/background_light"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/bCallAgence"
         app:layout_constraintLeft_toRightOf="@+id/bCallAgence"
-        app:layout_constraintRight_toLeftOf="@+id/bMessageAgence"
-        android:layout_marginBottom="0dp" />
+        app:layout_constraintRight_toLeftOf="@+id/bMessageAgence" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"

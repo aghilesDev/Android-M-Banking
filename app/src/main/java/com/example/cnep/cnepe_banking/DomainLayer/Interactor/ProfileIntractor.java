@@ -30,7 +30,7 @@ public class ProfileIntractor implements IProfilInteractor {
             protected Void doInBackground(Void... params) {
 
                 user=new UserParticulier("8465165",User.PARTICULIER,"user@gmail.com","0765254587","auelaue part","Goumeziane","Aghiles","02/07/1996","tizi-ouzou","masculin");
-                user=new UserProfessionnel("8465165",User.PROFESSIONNEL,"user@gmail.com","0765254587","auelaue part","Goumeziane","Aghiles","02/07/1996","tizi-ouzou","masculin","516" +
+                user=new UserProfessionnel("8465165",User.PROFESSIONNEL,"user@gmail.com","0765254587","Draa Ben Khedda,Tizi-Ouzou","Goumeziane","Aghiles","02/07/1996","tizi-ouzou","masculin","516" +
                         "21646515","9845898151");
                 return null;
             }

@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IloginInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.LoginInteractor;
+import com.example.cnep.cnepe_banking.Models.RequestLogin;
 import com.example.cnep.cnepe_banking.Models.User;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractLogin;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.ILoginPresenter;
@@ -25,10 +26,10 @@ public class LoginPresenter extends BasePresenter<ContractLogin.View> implements
     }
 
     @Override
-    public void attempToLogin(String identifiantClient, String motDepasse) {
+    public void attempToLogin(RequestLogin requestLogin) {
 
         System.out.println("hey");
-        interactor.loginCase(identifiantClient,motDepasse);
+        interactor.loginCase(requestLogin);
     }
 
 
@@ -43,5 +44,15 @@ public class LoginPresenter extends BasePresenter<ContractLogin.View> implements
     public void loginNotAuthorized() {
         view.loginFailed();
 
+    }
+
+    @Override
+    public void NoConnectionFound() {
+        view.noConnection();
+    }
+
+    @Override
+    public boolean isConnected() {
+        return false;
     }
 }

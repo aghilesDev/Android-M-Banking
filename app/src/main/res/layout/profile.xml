@@ -42,6 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Telephone:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -53,6 +55,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tNis"
             app:layout_constraintTop_toTopOf="@+id/tNis" />
@@ -64,6 +68,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/textView30"
             app:layout_constraintTop_toTopOf="@+id/textView30" />
 
@@ -73,6 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Adresse:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@+id/tPrenomUser"
             app:layout_constraintTop_toBottomOf="@+id/tPrenomUser" />
 
@@ -82,6 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="NIF:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@+id/textView19"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -92,6 +102,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/tPrenomUser"
             app:layout_constraintTop_toTopOf="@+id/tPrenomUser" />
 
@@ -102,6 +114,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/textView19"
             app:layout_constraintTop_toTopOf="@+id/textView19" />
 
@@ -111,6 +125,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Prenom:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@+id/tNomUser"
             app:layout_constraintTop_toBottomOf="@+id/tNomUser" />
 
@@ -120,6 +136,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="E-mail:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@+id/textView30"
             app:layout_constraintTop_toBottomOf="@+id/adresseUser" />
 
@@ -130,6 +148,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/textView8"
             app:layout_constraintTop_toTopOf="@+id/textView8" />
 
@@ -140,6 +160,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/tNomUser"
             app:layout_constraintTop_toTopOf="@+id/tNomUser" />
 
@@ -151,6 +173,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Nom:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -161,6 +185,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="TextView"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/tNif"
             app:layout_constraintTop_toTopOf="@+id/tNif" />
 
@@ -170,6 +196,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="NIS:"
+            android:textColor="#444444"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@+id/tNif"
             app:layout_constraintTop_toBottomOf="@+id/tNif" />
     </android.support.constraint.ConstraintLayout>

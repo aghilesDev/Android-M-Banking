@@ -69,12 +69,13 @@ public class AgenceDetailledView extends AppCompatActivity implements View.OnCli
 
         agence = (AgenceViewModel) getIntent().getSerializableExtra("agence");
 
-        if(this.agence!=null) {
+        if(agence!=null) {
             codeAgence = agence.getId();
             diplayData();
         }
         else {
             codeAgence=getIntent().getIntExtra("codeAgence",0);
+
             this.initialize(codeAgence);
         }
 
@@ -158,7 +159,7 @@ public class AgenceDetailledView extends AppCompatActivity implements View.OnCli
     private void diplayData(){
         cadre.setVisibility(View.VISIBLE);
         bCall.setVisibility(View.VISIBLE);
-        bLocation.setVisibility(View.VISIBLE);
+       // bLocation.setVisibility(View.VISIBLE);
         bMessage.setVisibility(View.VISIBLE);
         bNoConnection.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
