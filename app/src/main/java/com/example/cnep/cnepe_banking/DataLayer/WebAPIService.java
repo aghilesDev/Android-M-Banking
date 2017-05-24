@@ -266,6 +266,7 @@ public class WebAPIService implements IService {
         } catch (IOException e) {
             throw new NoConnectionException();
         }
+
         switch (response.code())
         {
             case 200:{break;}
@@ -280,14 +281,13 @@ public class WebAPIService implements IService {
 
 
         Gson gson= new Gson();
-        AgenceViewModel agenceViewModel=null;
+        ResponseAllAgences responseAllAgences=null;
         try {
-            agenceViewModel=(AgenceViewModel)gson.fromJson(response.body().string(),AgenceViewModel.class);
-            System.out.println(agenceViewModel);
+            responseAllAgences=gson.fromJson(response.body().string(),ResponseAllAgences.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return responseAllAgences;
     }
 
     @Override

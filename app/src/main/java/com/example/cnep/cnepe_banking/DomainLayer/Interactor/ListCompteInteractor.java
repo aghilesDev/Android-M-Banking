@@ -43,7 +43,7 @@ public class ListCompteInteractor implements IListCompteInteractor {
                     comptes=service.getUserComptes(codeAgence);
 
 
-                }catch (NoConnectionException e2)
+                }catch (NoConnectionException e1)
                 {
                     error= ErrorCode._NO_CONNECTION;
                 }catch (NotAuthorizedException e2)
