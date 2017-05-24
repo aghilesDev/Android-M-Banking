@@ -258,7 +258,7 @@ public class WebAPIService implements IService {
 
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
-                .url(getUrl("Agence/all"))
+                .url(getUrl("Agence/all"))//ajouter la page
                 .build();
         Response response=null;
         try {
@@ -292,7 +292,38 @@ public class WebAPIService implements IService {
 
     @Override
     public ResponseAllAgences getAllAgences(String wilaya,int page) throws NoConnectionException, ErrorException {
-        return null;
+        OkHttpClient client=new OkHttpClient();
+        Request request= new Request.Builder()
+                .url(getUrl("Agence/all"))//ajouter la string wilayas plus la page
+                .build();
+        Response response=null;
+        try {
+            response= client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new NoConnectionException();
+        }
+
+        switch (response.code())
+        {
+            case 200:{break;}
+            case 404:{
+                throw  new NoConnectionException();
+            }
+            default:{
+                throw new ErrorException();
+            }
+        }
+
+
+
+        Gson gson= new Gson();
+        ResponseAllAgences responseAllAgences=null;
+        try {
+            responseAllAgences=gson.fromJson(response.body().string(),ResponseAllAgences.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return responseAllAgences;
     }
 
     @Override
