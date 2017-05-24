@@ -47,17 +47,17 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
 
     @Override
     public void LoadAgences() {
-        ArrayList<AgenceViewModel> agences=new  ArrayList<>();
-        agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-        agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-        agences.add(new AgenceViewModel(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+       // ArrayList<AgenceViewModel> agences=new  ArrayList<>();
+        //agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+       // agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+       // agences.add(new AgenceViewModel(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
        //presenter.sendAgences(agences);
     }
 
     @Override
     public void LoadAgences(String wilaya) {
-        ArrayList<AgenceViewModel> agences=new  ArrayList<>();
-        agences.add(new AgenceViewModel(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+        //ArrayList<AgenceViewModel> agences=new  ArrayList<>();
+        //agences.add(new AgenceViewModel(127,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
        // presenter.sendAgences(agences);
     }
 

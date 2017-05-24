@@ -8,14 +8,16 @@ import java.io.Serializable;
 
 public class AgenceViewModel implements Serializable{
     private int id;
+    private int agenceid;
     private String wilaya;
     private String libelle;
     private String adresse;
     private String telephone;
     private String email;
 
-    public AgenceViewModel(int id, String libelle, String wilaya, String adresse, String telephone, String email) {
+    public AgenceViewModel(int id,int agenceid, String libelle, String wilaya, String adresse, String telephone, String email) {
         this.id = id;
+        this.agenceid = agenceid;
         this.wilaya = wilaya;
         this.libelle = libelle;
         this.adresse=adresse;
@@ -23,8 +25,12 @@ public class AgenceViewModel implements Serializable{
         this.email=email;
     }
 
-    public int getId() {
+    public int id() {
         return id;
+    }
+
+    public int getagenceid() {
+        return agenceid;
     }
 
     public String getLibelle() {
@@ -49,6 +55,6 @@ public class AgenceViewModel implements Serializable{
 
     @Override
     public String toString() {
-        return "id"+id+"\nwilaya"+wilaya+"\nlibelle"+libelle+"\nadresse"+adresse+"\ntelephone"+telephone+"\nemail"+email;
+        return "id"+id+"\nagenceid"+agenceid+"\nwilaya"+wilaya+"\nlibelle"+libelle+"\nadresse"+adresse+"\ntelephone"+telephone+"\nemail"+email;
     }
 }

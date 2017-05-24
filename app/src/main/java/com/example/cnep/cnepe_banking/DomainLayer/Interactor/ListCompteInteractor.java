@@ -85,8 +85,6 @@ public class ListCompteInteractor implements IListCompteInteractor {
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
 
 
-
-
     }
 
     @Override

@@ -70,7 +70,7 @@ public class AgenceDetailledView extends AppCompatActivity implements View.OnCli
         agence = (AgenceViewModel) getIntent().getSerializableExtra("agence");
 
         if(agence!=null) {
-            codeAgence = agence.getId();
+            codeAgence = agence.getagenceid();
             diplayData();
         }
         else {
@@ -164,7 +164,7 @@ public class AgenceDetailledView extends AppCompatActivity implements View.OnCli
         bNoConnection.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
 
-        numAgence.setText(agence.getId() + "");
+        numAgence.setText(agence.getagenceid() + "");
         intituleAgence.setText(agence.getLibelle());
         willayaAgence.setText(agence.getWilaya());
         adresseAgence.setText(agence.getAdresse());

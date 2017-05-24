@@ -1,7 +1,6 @@
 package com.example.cnep.cnepe_banking.DataLayer;
 
 import android.util.Log;
-import android.widget.Switch;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.MotDePasseInvalideException;
@@ -25,8 +24,6 @@ import com.example.cnep.cnepe_banking.Models.UserMoral;
 import com.example.cnep.cnepe_banking.Models.UserParticulier;
 import com.example.cnep.cnepe_banking.Models.UserProfessionnel;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
@@ -34,9 +31,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -50,7 +44,7 @@ public class WebAPIService implements IService {
 
     private static WebAPIService instance;
     private ResponseLogin logInformation;
-    private String baseUrl="http://192.168.1.3:5454/";
+    private String baseUrl="http://192.168.1.5:5454/";
     private static MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     private WebAPIService() {
         logInformation= new ResponseLogin("");
@@ -80,7 +74,7 @@ public class WebAPIService implements IService {
         OkHttpClient client=new OkHttpClient();
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/Agence/all")).
+                url(getUrl("/compte?agenceid="+codeAgence)).
                 build();
         Response response=null;
 
@@ -306,7 +300,7 @@ public class WebAPIService implements IService {
         OkHttpClient client=new OkHttpClient();
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/Agence/all")).
+                url(getUrl("/AgenceClient")).
                 build();
         Response response=null;
 

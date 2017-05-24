@@ -81,7 +81,7 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
 
         public void display(AgenceViewModel agence) {
             currentAgence=agence;
-            codeAgence.setText(agence.getId()+"");
+            codeAgence.setText(agence.getagenceid()+"");
             libelléAgence.setText(agence.getLibelle());
         }
 
@@ -89,7 +89,7 @@ public class AgenceAdapter extends RecyclerView.Adapter<AgenceAdapter.MyViewHold
         public void onClick(View v) {
             Intent it=new Intent(context, ListCompteView.class);
 
-            it.putExtra("codeAgence",currentAgence.getId());
+            it.putExtra("codeAgence",currentAgence.id());
 
             context.startActivity(it);
 
