@@ -11,15 +11,23 @@ import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 import com.example.cnep.cnepe_banking.Models.CreditView;
+import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 import com.example.cnep.cnepe_banking.Models.RequestChangementEmail;
 import com.example.cnep.cnepe_banking.Models.RequestChangementMotDePasse;
 import com.example.cnep.cnepe_banking.Models.RequestChangementTelephone;
+import com.example.cnep.cnepe_banking.Models.RequestCommandeCarte;
+import com.example.cnep.cnepe_banking.Models.RequestCommandeCheque;
 import com.example.cnep.cnepe_banking.Models.RequestLogin;
+import com.example.cnep.cnepe_banking.Models.ResponseAllAgences;
 import com.example.cnep.cnepe_banking.Models.ResponseLogin;
 import com.example.cnep.cnepe_banking.Models.User;
+import com.example.cnep.cnepe_banking.Models.UserMoral;
+import com.example.cnep.cnepe_banking.Models.UserParticulier;
+import com.example.cnep.cnepe_banking.Models.UserProfessionnel;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -31,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +50,7 @@ public class WebAPIService implements IService {
 
     private static WebAPIService instance;
     private ResponseLogin logInformation;
-    private String baseUrl="http://192.168.43.208:5454/api";
+    private String baseUrl="http://192.168.1.3:5454/";
     private static MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     private WebAPIService() {
         logInformation= new ResponseLogin("");
@@ -60,26 +69,198 @@ public class WebAPIService implements IService {
 
     private String getUrl(String suffix)
     {
-        return baseUrl+suffix;
+        return baseUrl+"api"+suffix;
     }
 
 
 
     @Override
-    public ArrayList<CompteViewModel> getUserComptes() throws NoConnectionException, NotAuthorizedException, ErrorException {
-        return null;
+    public ArrayList<CompteViewModel> getUserComptes(int codeAgence) throws NoConnectionException, NotAuthorizedException, ErrorException {
+
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String comptesInfo="";
+        Gson gson=new Gson();
+
+        try {
+            comptesInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<CompteViewModel> comptes;
+
+        Type comptesListeType=new  TypeToken<ArrayList<CompteViewModel>>(){}.getType();
+        comptes=gson.fromJson(comptesInfo,comptesListeType);
+
+
+        return comptes;
     }
 
     @Override
     public CompteViewModel getCompte(String rib) throws NoConnectionException, NotAuthorizedException, ErrorException {
 
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String compteInfo="";
+        Gson gson=new Gson();
+
+        try {
+            compteInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        CompteViewModel compte;
+        compte=gson.fromJson(compteInfo,CompteViewModel.class);
 
 
-        return null;
+        return compte;
     }
 
     @Override
-    public AgenceViewModel getAllAgences() throws NoConnectionException, ErrorException {
+    public ArrayList<MouvementViewModel> getMouvements(String rib) throws NoConnectionException, NotAuthorizedException, ErrorException {
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String mouvementsInfo="";
+        Gson gson=new Gson();
+
+        try {
+            mouvementsInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<MouvementViewModel> mouvements;
+
+        Type mouvementsListeType=new  TypeToken<ArrayList<MouvementViewModel>>(){}.getType();
+        mouvements=gson.fromJson(mouvementsInfo,mouvementsListeType);
+
+
+        return mouvements;
+    }
+
+    @Override
+    public ArrayList<String> getWilayas() throws NoConnectionException, ErrorException {
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String wilayasInfo="";
+        Gson gson=new Gson();
+
+        try {
+            wilayasInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> wilayas;
+
+        Type wilayasListeType=new  TypeToken<ArrayList<String>>(){}.getType();
+        wilayas=gson.fromJson(wilayasInfo,wilayasListeType);
+
+
+        return wilayas;
+    }
+
+    @Override
+    public ResponseAllAgences getAllAgences(int page) throws NoConnectionException, ErrorException {
 
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
@@ -112,17 +293,59 @@ public class WebAPIService implements IService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return agenceViewModel;
-    }
-
-    @Override
-    public AgenceViewModel getAllAgences(String wilaya) throws NoConnectionException, ErrorException {
         return null;
     }
 
     @Override
-    public AgenceViewModel getUserAgences() throws NoConnectionException, NotAuthorizedException, ErrorException {
+    public ResponseAllAgences getAllAgences(String wilaya,int page) throws NoConnectionException, ErrorException {
         return null;
+    }
+
+    @Override
+    public ArrayList<AgenceViewModel> getUserAgences() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+                }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String agencesInfo="";
+        Gson gson=new Gson();
+
+        try {
+            agencesInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<AgenceViewModel> agences;
+
+        Type agenceListeType=new  TypeToken<ArrayList<AgenceViewModel>>(){}.getType();
+        agences=gson.fromJson(agencesInfo,agenceListeType);
+
+
+        return agences;
     }
 
     @Override
@@ -131,7 +354,7 @@ public class WebAPIService implements IService {
 
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
-                .url(getUrl("Agence/"+codeAgence))
+                .url(getUrl("/Agence/"+codeAgence))
                 .build();
         Response response=null;
         try {
@@ -162,19 +385,125 @@ public class WebAPIService implements IService {
     }
 
     @Override
-    public CreditView getCredits() throws NoConnectionException, NotAuthorizedException, ErrorException {
-        return null;
+    public ArrayList<CreditView> getCredits() throws NoConnectionException, NotAuthorizedException, ErrorException {
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String creditsInfo="";
+        Gson gson=new Gson();
+
+        try {
+            creditsInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<CreditView> credits;
+
+        Type creditListeType=new  TypeToken<ArrayList<CreditView>>(){}.getType();
+        credits=gson.fromJson(creditsInfo,creditListeType);
+
+
+        return credits;
     }
 
     @Override
     public User getProfile() throws NoConnectionException, NotAuthorizedException, ErrorException {
-        return null;
+        OkHttpClient client=new OkHttpClient();
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/Agence/all")).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+        String userInfo="";
+        Gson gson=new Gson();
+
+        try {
+            userInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        User user;
+        user=gson.fromJson(userInfo,User.class);
+        switch (user.getType())
+        {
+            case User.PARTICULIER:{
+                user=gson.fromJson(userInfo,UserParticulier.class);
+                break;
+            }
+            case User.PROFESSIONNEL:{
+                user=gson.fromJson(userInfo,UserProfessionnel.class);
+                break;
+            }
+            case User.MORAL:{
+                user=gson.fromJson(userInfo,UserMoral.class);
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+
+
+        return user;
     }
 
     @Override
-    public int postRequestCheque(String motPasse) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+    public int postRequestCheque(RequestCommandeCheque requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+         return 0;
+    }
+
+    @Override
+    public int postRequestCarte(RequestCommandeCarte requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
         return 0;
     }
+
 
     @Override
     public int postRequestChangeEmail(RequestChangementEmail request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
@@ -206,7 +535,7 @@ public class WebAPIService implements IService {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.208:5454/token")
+                .url(baseUrl+"token")
                 .header("Content-Type","application/x-www-form-urlencoded")
                 .post(body)
                 .build();

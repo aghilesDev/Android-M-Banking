@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class ListAllAgencesPresenter extends BasePresenter<ContratAllAgences.View> implements ContratAllAgences.ActionView,IListAllAgencesInteractor.CallBack{
 
     IListAllAgencesInteractor interactor=new ListAllAgencesInteractor(this);
+    private int page;
 
     public ListAllAgencesPresenter(ContratAllAgences.View view) {
         this.attachView(view);
+        page=0;
     }
 
     @Override
@@ -33,7 +35,18 @@ public class ListAllAgencesPresenter extends BasePresenter<ContratAllAgences.Vie
     @Override
     public void onInitialize() {
 
+        page=0;
         interactor.onInitializing();
+
+    }
+
+    @Override
+    public void LoadAgences(String wilaya) {
+        page=0;
+        if(wilaya.equalsIgnoreCase("Tous"))
+            interactor.loadMoreAgences(page);
+        else
+            interactor.loadMoreAgences(wilaya,page);
 
     }
 
@@ -41,9 +54,9 @@ public class ListAllAgencesPresenter extends BasePresenter<ContratAllAgences.Vie
     public void LoadMoreAgences(String wilaya) {
 
        if(wilaya.equalsIgnoreCase("Tous"))
-            interactor.loadMoreAgences();
+            interactor.loadMoreAgences(page);
         else
-            interactor.loadMoreAgences(wilaya);
+            interactor.loadMoreAgences(wilaya,page);
     }
 
     @Override
@@ -55,6 +68,7 @@ public class ListAllAgencesPresenter extends BasePresenter<ContratAllAgences.Vie
 
     @Override
     public void receiveMoreAgences(ArrayList<AgenceViewModel> agences, boolean hasMore) {
+        page++;
         view.showMoreAgences(agences,hasMore);
 
     }

@@ -13,7 +13,9 @@ public interface ContratAllAgences {
     public interface ActionView extends ContratConnected.ActionView
     {
         public void onInitialize();
+        public void LoadAgences(String wilaya);
         public void LoadMoreAgences(String wilaya);
+
     }
 
     public interface View extends ContratConnected.View

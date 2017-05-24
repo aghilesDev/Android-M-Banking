@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public interface IListAllAgencesInteractor extends IConnectedInteractor{
 
     public void onInitializing();
-    public void loadMoreAgences();
-    public void loadMoreAgences(String wilaya);
+    public void loadMoreAgences(int page);
+    public void loadMoreAgences(String wilaya,int page);
 
 
     public interface CallBack extends  IConnectedInteractor.CallBack

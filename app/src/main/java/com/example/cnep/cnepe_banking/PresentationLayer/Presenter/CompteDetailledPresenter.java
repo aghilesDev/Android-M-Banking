@@ -3,6 +3,7 @@ package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.CompteDetailledInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.ICompteDetailledInteractor;
 import com.example.cnep.cnepe_banking.Models.CompteViewModel;
+import com.example.cnep.cnepe_banking.Models.RequestCommande;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContratCompteDetailled;
 
 /**
@@ -36,8 +37,8 @@ public class CompteDetailledPresenter extends BasePresenter<ContratCompteDetaill
     }
 
     @Override
-    public void actionCommande(String rib, String motDepasse) {
-        interactor.executeCommande(rib,motDepasse);
+    public void actionCommande(RequestCommande requete) {
+        interactor.executeCommande(requete);
     }
 
     @Override

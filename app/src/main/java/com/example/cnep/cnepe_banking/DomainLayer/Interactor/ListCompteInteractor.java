@@ -2,9 +2,13 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 
 import android.os.AsyncTask;
 
+import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorCode;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListCompteInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 
 import java.util.ArrayList;
@@ -15,51 +19,40 @@ import java.util.ArrayList;
 
 public class ListCompteInteractor implements IListCompteInteractor {
     private CallBack presenter;
-    private ArrayList<CompteViewModel> comptes;
+    private IService service;
 
 
     public ListCompteInteractor(CallBack presenter) {
         this.presenter = presenter;
+        service= WebAPIService.getInstance();
     }
 
     @Override
-    public void LoadCompteRequest(int codeAgence) {
-        comptes=new ArrayList<>();
-
-
-
+    public void LoadCompteRequest(final int codeAgence) {
 
         new AsyncTask<Void, Void, Void>( ) {
 
-            int error=0;
-
+            int error;
+            private ArrayList<CompteViewModel> comptes;
             @Override
             protected Void doInBackground(Void... params) {
+                error=0;
                 try {
-                    Thread.sleep(2000);
-                    if(!presenter.isConnected())
-                        throw new NoConnectionException();
-                    if(false)
-                        throw new NotAuthorizedException();
-
-                    comptes.add(new CompteViewModel("0156487952","2495452965949949","EPARGNE","22/04/2017",50000,true));
-                    comptes.add(new CompteViewModel("6825283836","9842984849426369","CHEQUE","22/04/2017",75000,false));
-                    comptes.add(new CompteViewModel("5818752288","5874754757967979","EPARGNE","22/04/2017",25000,false));
-                    comptes.add(new CompteViewModel("9527197512","8638622853266886","CHEQUE","22/04/2017",65083,true));
-                    comptes.add(new CompteViewModel("7452949798","4947984479849479","CHEQUE","22/04/2017",85649.548,false));
 
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    comptes=service.getUserComptes(codeAgence);
+
+
                 }catch (NoConnectionException e2)
                 {
-                    error=CONNECTION_ERROR;
+                    error= ErrorCode._NO_CONNECTION;
                 }catch (NotAuthorizedException e2)
                 {
-                    error=AUTHORIZATION_ERROR;
+                    error=ErrorCode._NOT_AUTHENTIFICATE;
 
+                } catch (ErrorException e) {
+                    error=ErrorCode._ERROR;
                 }
-
 
 
                 return null;
@@ -68,16 +61,28 @@ public class ListCompteInteractor implements IListCompteInteractor {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if(error==CONNECTION_ERROR)
-                    presenter.NoConnectionFound();
-                else if(error==AUTHORIZATION_ERROR)
+                switch (error)
                 {
-                    //service clear
-                    presenter.logedOut();
-                }else
-                presenter.LoadComptesReponse(comptes);
+                    case ErrorCode._NO_CONNECTION: {
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._NOT_AUTHENTIFICATE: {
+                        presenter.logedOut();
+                        break;
+                    }
+                    case ErrorCode._ERROR: {
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default: {
+                        presenter.LoadComptesReponse(comptes);
+                        break;
+                    }
+                }
+
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);;
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
 
 
 

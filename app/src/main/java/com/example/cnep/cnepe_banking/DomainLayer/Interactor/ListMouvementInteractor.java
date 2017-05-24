@@ -2,9 +2,13 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 
 import android.os.AsyncTask;
 
+import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorCode;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListMouvementInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.MouvementViewModel;
 
 import java.util.ArrayList;
@@ -16,49 +20,42 @@ import java.util.ArrayList;
 public class ListMouvementInteractor implements IListMouvementInteractor{
 
     private CallBack presenter;
-    private ArrayList<MouvementViewModel> mouvements;
+    private IService service;
+
 
 
     public ListMouvementInteractor(CallBack presenter) {
         this.presenter = presenter;
+        service= WebAPIService.getInstance();
     }
 
 
     @Override
     public void loadMouvementsRequest(final String numeroCompte) {
 
-         mouvements= new ArrayList<>();
+
         new AsyncTask<Void, Void, Void>( ) {
 
-            int error=0;
+            int error;
+            private ArrayList<MouvementViewModel> mouvements;
 
             @Override
             protected Void doInBackground(Void... params) {
+                error=0;
                 try {
-                    Thread.sleep(2000);
 
-                    if(!presenter.isConnected())
-                        throw new NoConnectionException();
-                    if(false)
-                        throw new NotAuthorizedException();
-
-                    mouvements.add(new MouvementViewModel("20/04/2017","virement",54651));
-                    mouvements.add(new MouvementViewModel("15/03/2017","virement",59651));
-                    mouvements.add(new MouvementViewModel("07/11/2016","virement",98496));
-                    mouvements.add(new MouvementViewModel("20/10/2016","virement",98498));
+                mouvements=service.getMouvements(numeroCompte);
 
 
-                } catch (InterruptedException e) {
-                e.printStackTrace();
-            }catch (NoConnectionException e2)
+                }catch (NoConnectionException e)
                 {
-                    error=CONNECTION_ERROR;
-                }catch (NotAuthorizedException e2)
+                    error= ErrorCode._NO_CONNECTION;
+                }catch (NotAuthorizedException e1)
                 {
-                    error=AUTHORIZATION_ERROR;
-
+                    error=ErrorCode._NOT_AUTHENTIFICATE;
+                } catch (ErrorException e2) {
+                    error=ErrorCode._ERROR;
                 }
-
 
 
                 return null;
@@ -67,14 +64,25 @@ public class ListMouvementInteractor implements IListMouvementInteractor{
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if(error==CONNECTION_ERROR)
-                    presenter.NoConnectionFound();
-                else if(error==AUTHORIZATION_ERROR)
+                switch (error)
                 {
-                    //service clear
-                    presenter.logedOut();
-                }else
-                presenter.loadMouvementsReponse(mouvements);
+                    case ErrorCode._NO_CONNECTION:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._NOT_AUTHENTIFICATE:{
+                        presenter.logedOut();
+                        break;
+                    }
+                    case ErrorCode._ERROR:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default:
+                    {
+                        presenter.loadMouvementsReponse(mouvements);
+                    }
+                }
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);;
 

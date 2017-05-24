@@ -2,7 +2,12 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 
 import android.os.AsyncTask;
 
+import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IProfilInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.User;
 import com.example.cnep.cnepe_banking.Models.UserParticulier;
 import com.example.cnep.cnepe_banking.Models.UserProfessionnel;
@@ -16,22 +21,32 @@ import java.util.ArrayList;
 public class ProfileIntractor implements IProfilInteractor {
 
     private CallBack presenter;
-    private User user;
+    private IService service;
+
 
     public ProfileIntractor(CallBack presenter) {
         this.presenter = presenter;
+        service= WebAPIService.getInstance();
     }
 
     @Override
     public void onInitializing() {
 
         AsyncTask<Void,Void,Void> task= new AsyncTask<Void, Void, Void>() {
+            private User user;
+            private int error;
             @Override
             protected Void doInBackground(Void... params) {
-
-                user=new UserParticulier("8465165",User.PARTICULIER,"user@gmail.com","0765254587","auelaue part","Goumeziane","Aghiles","02/07/1996","tizi-ouzou","masculin");
-                user=new UserProfessionnel("8465165",User.PROFESSIONNEL,"user@gmail.com","0765254587","Draa Ben Khedda,Tizi-Ouzou","Goumeziane","Aghiles","02/07/1996","tizi-ouzou","masculin","516" +
-                        "21646515","9845898151");
+                error=0;
+                try {
+                    user=service.getProfile();
+                } catch (NoConnectionException e) {
+                    e.printStackTrace();
+                } catch (NotAuthorizedException e) {
+                    e.printStackTrace();
+                } catch (ErrorException e) {
+                    e.printStackTrace();
+                }
                 return null;
             }
 

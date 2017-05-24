@@ -2,8 +2,14 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 
 import android.os.AsyncTask;
 
+import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorCode;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAllAgencesInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
+import com.example.cnep.cnepe_banking.Models.ResponseAllAgences;
 
 import java.util.ArrayList;
 
@@ -14,9 +20,11 @@ import java.util.ArrayList;
 public class ListAllAgencesInteractor implements IListAllAgencesInteractor {
 
     private CallBack presenter;
+    IService service;
 
     public ListAllAgencesInteractor(CallBack presenter) {
         this.presenter = presenter;
+        service= WebAPIService.getInstance();
     }
 
     @Override
@@ -24,54 +32,45 @@ public class ListAllAgencesInteractor implements IListAllAgencesInteractor {
 
         AsyncTask<Void,Void,Void> task=new AsyncTask<Void, Void, Void>() {
 
-            ArrayList<AgenceViewModel> agences=new ArrayList<>();
-            ArrayList<String> wilayas=new ArrayList<>();;
+            private ResponseAllAgences responseAllAgences;
+            private ArrayList<String> wilayas;
+            private int error;
 
             @Override
             protected Void doInBackground(Void... params) {
-
+            error=0;
                 try {
-                    Thread.sleep(2000);
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce00124@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce00128@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(129,"Blida","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(130,"Bejaia","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(131,"Annaba","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(132,"Boussaada","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(133,"Biskra","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(134,"Skikda","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(135,"Akbou","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(136,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(137,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-
-
-                    wilayas.add("Alger");
-                    wilayas.add("Annaba");
-                    wilayas.add("Boumerdes");
-                    wilayas.add("Jijel");
-                    wilayas.add("Oran");
-                    wilayas.add("Setif");
-                    wilayas.add("Tizi-Ouzou");
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    wilayas=service.getWilayas();
+                    responseAllAgences=service.getAllAgences(0);
+                } catch (NoConnectionException e) {
+                    error= ErrorCode._NO_CONNECTION;
+                } catch (ErrorException e) {
+                    error=ErrorCode._ERROR;
                 }
+
 
                 return null;
             }
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                presenter.toInitialize(agences,wilayas,true);
+
+                switch (error)
+                {
+                    case ErrorCode._NO_CONNECTION:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._ERROR:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default:{
+                        presenter.toInitialize(responseAllAgences.getAgences(),wilayas,responseAllAgences.isHasMore());
+                        break;
+                    }
+                }
+
             }
         };
 
@@ -83,54 +82,48 @@ public class ListAllAgencesInteractor implements IListAllAgencesInteractor {
     }
 
     @Override
-    public void loadMoreAgences() {
+    public void loadMoreAgences(final int page) {
 
         AsyncTask<Void,Void,Void> task=new AsyncTask<Void, Void, Void>() {
 
-            ArrayList<AgenceViewModel> agences=new ArrayList<>();
-
+            private ResponseAllAgences responseAllAgences;
+            private ArrayList<String> wilayas;
+            private int error;
 
             @Override
             protected Void doInBackground(Void... params) {
-
+                error=0;
                 try {
-                    Thread.sleep(2000);
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-
-
-
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    responseAllAgences=service.getAllAgences(page);//changer pour faire une incrémentation automatique
+                } catch (NoConnectionException e) {
+                    error= ErrorCode._NO_CONNECTION;
+                } catch (ErrorException e) {
+                    error=ErrorCode._ERROR;
                 }
+
 
                 return null;
             }
-
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                presenter.receiveMoreAgences(agences,true);
+
+                switch (error)
+                {
+                    case ErrorCode._NO_CONNECTION:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._ERROR:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default:{
+                        presenter.receiveMoreAgences(responseAllAgences.getAgences(),responseAllAgences.isHasMore());
+                        break;
+                    }
+                }
+
             }
         };
         task.execute();
@@ -139,51 +132,51 @@ public class ListAllAgencesInteractor implements IListAllAgencesInteractor {
     }
 
     @Override
-    public void loadMoreAgences(String wilaya) {
+    public void loadMoreAgences(final String wilaya, final int page) {
 
         AsyncTask<Void,Void,Void> task=new AsyncTask<Void, Void, Void>() {
 
-            ArrayList<AgenceViewModel> agences=new ArrayList<>();
+            private ResponseAllAgences responseAllAgences;
+            private ArrayList<String> wilayas;
+            private int error;
 
             @Override
             protected Void doInBackground(Void... params) {
-
+                error=0;
                 try {
-                    Thread.sleep(2000);
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    responseAllAgences=service.getAllAgences(wilaya,page);//changer pour faire une incrémentation automatique
+                } catch (NoConnectionException e) {
+                    error= ErrorCode._NO_CONNECTION;
+                } catch (ErrorException e) {
+                    error=ErrorCode._ERROR;
                 }
+
 
                 return null;
             }
-
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                presenter.receiveMoreAgences(agences,true);
+
+                switch (error)
+                {
+                    case ErrorCode._NO_CONNECTION:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._ERROR:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default:{
+                        presenter.receiveMoreAgences(responseAllAgences.getAgences(),responseAllAgences.isHasMore());
+                        break;
+                    }
+                }
+
             }
         };
+
         task.execute();
 
 

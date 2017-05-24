@@ -1,6 +1,7 @@
 package com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces;
 
 import com.example.cnep.cnepe_banking.Models.CompteViewModel;
+import com.example.cnep.cnepe_banking.Models.RequestCommande;
 
 /**
  * Created by Aghiles on 2017-04-30.
@@ -9,7 +10,7 @@ import com.example.cnep.cnepe_banking.Models.CompteViewModel;
 public interface ICompteDetailledInteractor extends ILogedInteractor{
 
     public  void OnInitializing(String numCompte);
-    public  void executeCommande(String rib,String motDePasse);
+    public  void executeCommande(RequestCommande requete);
 
 
 

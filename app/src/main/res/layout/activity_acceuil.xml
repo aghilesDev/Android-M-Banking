@@ -79,6 +79,7 @@
         android:background="@drawable/button_selector"
         android:text="E-Paiement"
         android:textColor="@android:color/background_light"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="@+id/bAgences"
         app:layout_constraintTop_toBottomOf="@+id/bAgences" />
 

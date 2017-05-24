@@ -2,9 +2,13 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 
 import android.os.AsyncTask;
 
+import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorCode;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListCreditInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.CreditView;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.Interfaces.IListCreditPresenter;
 
@@ -16,55 +20,42 @@ import java.util.ArrayList;
 
 public class ListCreditInteractor implements IListCreditInteractor {
 
-    private ArrayList<CreditView> credits;
+
     private CallBack presenter;
+    IService service;
 
 
     public ListCreditInteractor(CallBack presenter) {
         this.presenter = presenter;
+        service= WebAPIService.getInstance();
     }
 
 
     @Override
     public void LoadCreditsRequest() {
 
-        credits=new ArrayList<>();
 
         new AsyncTask<Void,Void,Void>(){
 
             int error=0;
+            private ArrayList<CreditView> credits;
 
             @Override
             protected Void doInBackground(Void... params) {
 
                 try {
-                    Thread.sleep(2000);
-                    if(false)
-                        throw new NoConnectionException();
-                    if(false)
-                        throw new NotAuthorizedException();
+                    credits=service.getCredits();
 
-                    credits.add(new CreditView("25","5255220555",58956,45632,"20/10/2014","Aucun"));
-                    credits.add(new CreditView("266","5255220458",58956,45632,"20/10/2014","Aucun"));
-                    credits.add(new CreditView("20","548520555",58956,45632,"20/10/2014","Aucun"));
-
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }catch (NoConnectionException e2)
                 {
-                    error=CONNECTION_ERROR;
+                    error= ErrorCode._NO_CONNECTION;
                 }catch (NotAuthorizedException e2)
                 {
-                    error=AUTHORIZATION_ERROR;
+                    error=ErrorCode._NOT_AUTHENTIFICATE;
 
+                } catch (ErrorException e) {
+                    error=ErrorCode._ERROR;
                 }
-
-
-
-
-
-
 
 
                 return null;
@@ -73,14 +64,25 @@ public class ListCreditInteractor implements IListCreditInteractor {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if(error==CONNECTION_ERROR)
-                    presenter.NoConnectionFound();
-                else if(error==AUTHORIZATION_ERROR)
+                switch (error)
                 {
-                    //service clear
-                    presenter.logedOut();
-                }else
-                presenter.LoadCreditsReponse(credits);
+                    case ErrorCode._NO_CONNECTION: {
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._NOT_AUTHENTIFICATE: {
+                        presenter.logedOut();
+                        break;
+                    }
+                    case ErrorCode._ERROR: {
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default: {
+                        presenter.LoadCreditsReponse(credits);
+                        break;
+                    }
+                }
 
 
             }

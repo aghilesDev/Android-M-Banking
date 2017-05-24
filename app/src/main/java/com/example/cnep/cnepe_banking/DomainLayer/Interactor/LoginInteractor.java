@@ -36,9 +36,10 @@ public class LoginInteractor implements IloginInteractor {
 
 
         new AsyncTask<Void, Void, Void>() {
-            int error=0;
+            int error;
             @Override
             protected Void doInBackground(Void... params) {
+                error=0;
                 try {
                     service.postRequestLogIn(requestLogin);
 

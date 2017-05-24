@@ -2,9 +2,13 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 
 import android.os.AsyncTask;
 
+import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorCode;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NotAuthorizedException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAgenceInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
 import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 
 import java.util.ArrayList;
@@ -17,11 +21,13 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
 
     private CallBack presenter;
     private ArrayList<AgenceViewModel> agences;
+    private IService service;
 
 
 
     public ListAgenceInteractor(CallBack presenter) {
         this.presenter = presenter;
+        service= WebAPIService.getInstance();
     }
 
     @Override
@@ -33,6 +39,11 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
 
         //presenter.sendWilayas(villes);
     }
+
+
+
+
+
 
     @Override
     public void LoadAgences() {
@@ -78,30 +89,20 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
                 try {
 
 
-                    Thread.sleep(2000);
-                    if(!presenter.isConnected())
-                        throw new NoConnectionException();
-                    if(false)
-                        throw new NotAuthorizedException();
 
-                    agences.add(new AgenceViewModel(125,"Alger","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(124,"Benmhidi2","Alger","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(126,"boumerdes","Boumerdes","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(128,"Tizi-Ouzou","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
-                    agences.add(new AgenceViewModel(127,"Benmhidi","Tizi-Ouzou","10 rue ,place 1 er mai","021362156","agce@cnepbanque.dz"));
+                    agences=service.getUserAgences();
 
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }catch (NoConnectionException e2)
                 {
-                 error=CONNECTION_ERROR;
+                 error= ErrorCode._NO_CONNECTION;
                 }catch (NotAuthorizedException e2)
                 {
-                    error=AUTHORIZATION_ERROR;
+                    error=ErrorCode._NOT_AUTHENTIFICATE;
 
+                } catch (ErrorException e) {
+                    error=ErrorCode._ERROR;
                 }
-
 
 
                 return null;
@@ -110,14 +111,30 @@ public class ListAgenceInteractor implements IListAgenceInteractor {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if(error==CONNECTION_ERROR)
-                    presenter.NoConnectionFound();
-                else if(error==AUTHORIZATION_ERROR)
+
+
+
+                switch (error)
                 {
-                    //service clear
-                    presenter.logedOut();
-                } else
-                presenter.loadAgencesReponse(agences);
+                    case ErrorCode._NO_CONNECTION:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    case ErrorCode._NOT_AUTHENTIFICATE:{
+                        presenter.logedOut();
+                        break;
+                    }
+                    case ErrorCode._ERROR:{
+                        presenter.NoConnectionFound();
+                        break;
+                    }
+                    default: {
+                        presenter.loadAgencesReponse(agences);
+                        break;
+                    }
+                }
+
+
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);;
 

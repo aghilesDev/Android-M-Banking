@@ -3,6 +3,7 @@ package com.example.cnep.cnepe_banking.DomainLayer.Interactor;
 import android.os.AsyncTask;
 
 import com.example.cnep.cnepe_banking.DataLayer.WebAPIService;
+import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorCode;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IAgenceDetailleInteractor;
@@ -16,7 +17,7 @@ import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 public class AgenceDetailledInteractor implements IAgenceDetailleInteractor {
 
     private CallBack callBack;
-    private AgenceViewModel agence;
+
     private IService service;
 
     public AgenceDetailledInteractor(CallBack callBack) {
@@ -29,15 +30,16 @@ public class AgenceDetailledInteractor implements IAgenceDetailleInteractor {
 
         AsyncTask<Void,Void,Void> task=new AsyncTask<Void, Void, Void>() {
             int error=0;
+            private AgenceViewModel agence;
             @Override
             protected Void doInBackground(Void... params) {
                 agence=null;
                 try {
                     agence=service.getAgence(codeAgence);
                 } catch (NoConnectionException e) {
-                    error=1;
+                    error= ErrorCode._NO_CONNECTION;
                 } catch (ErrorException e) {
-                    error=2;
+                    error=ErrorCode._ERROR;
                 }
 
 
@@ -51,7 +53,9 @@ public class AgenceDetailledInteractor implements IAgenceDetailleInteractor {
                 {
                     case 1:{callBack.NoConnectionFound();
                         break;}
-                    case 2:{break;}
+                    case 2:{
+                        callBack.NoConnectionFound();
+                        break;}
                     default:{
                         callBack.toInitialize(agence);
                         break;

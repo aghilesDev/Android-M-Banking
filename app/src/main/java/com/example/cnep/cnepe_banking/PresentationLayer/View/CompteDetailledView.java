@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cnep.cnepe_banking.Models.CompteViewModel;
+import com.example.cnep.cnepe_banking.Models.RequestCommande;
+import com.example.cnep.cnepe_banking.Models.RequestCommandeCarte;
+import com.example.cnep.cnepe_banking.Models.RequestCommandeCheque;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContratCompteDetailled;
 import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.CompteDetailledPresenter;
 import com.example.cnep.cnepe_banking.R;
@@ -189,21 +192,26 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
     @Override
     public void onClick(View v) {
 
+
+
         switch (v.getId())
         {
             case R.id.bCommande:
             {
                 String commande="";
+                int typeCompte=0;
 
                 if (compte.type.contains("EPARGNE")) {
                     commande="carte épargne";
+                    typeCompte= RequestCommande._CARTE;
                 }else
                 if(compte.type.equalsIgnoreCase("CHEQUE"))
                 {
                     commande="chéquier";
+                    typeCompte= RequestCommande._CHEQUE;
                 }
 
-                afficheDialogInterface(commande);
+                afficheDialogInterface(commande,typeCompte);
 
                 break;
             }
@@ -227,7 +235,7 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
 
 
 
-    private void afficheDialogInterface(final String commande)
+    private void afficheDialogInterface(final String commande,final int typeCompte)
     {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -251,7 +259,12 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
                }
                watingData();
                dialog.cancel();
-               presenter.actionCommande(compte.getRib(),motDePasse);
+               RequestCommande requete;
+               if (typeCompte==RequestCommande._CARTE)
+                   requete=new RequestCommandeCarte(compte.getRib(),motDePasse);
+                   else
+                   requete=new RequestCommandeCheque(compte.getRib(),motDePasse);
+               presenter.actionCommande(requete);
                motDePasse="";
 
            }
