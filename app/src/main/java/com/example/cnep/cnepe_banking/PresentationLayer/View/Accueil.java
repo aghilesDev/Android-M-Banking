@@ -7,11 +7,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
+import com.example.cnep.cnepe_banking.Models.RequestChangementAdresse;
 import com.example.cnep.cnepe_banking.R;
+import com.google.gson.Gson;
 
 public class Accueil extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,8 +27,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener {
         Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_accueille);
         setSupportActionBar(toolbar);
         setTitle("Accueil");
-
-
 
         bCompte.setOnClickListener(this);
         Button bCredits=(Button)findViewById(R.id.bCredits);

@@ -44,7 +44,7 @@ public class WebAPIService implements IService {
 
     private static WebAPIService instance;
     private ResponseLogin logInformation;
-    private String baseUrl="http://192.168.1.5:5454/";
+    private String baseUrl="http://192.168.1.6:5454/";
     private static MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     private WebAPIService() {
         logInformation= new ResponseLogin("");
@@ -490,27 +490,212 @@ public class WebAPIService implements IService {
 
     @Override
     public int postRequestCheque(RequestCommandeCheque requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
-         return 0;
+        OkHttpClient client=new OkHttpClient();
+        Gson gson=new Gson();
+        String json =gson.toJson(requete);
+
+        RequestBody body = RequestBody.create(JSON, json);
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/compte?agenceid=")). //modifier url
+                post(body).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+
+        return 0;
     }
 
     @Override
     public int postRequestCarte(RequestCommandeCarte requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+
+        OkHttpClient client=new OkHttpClient();
+        Gson gson=new Gson();
+        String json =gson.toJson(requete);
+
+        RequestBody body = RequestBody.create(JSON, json);
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/compte?agenceid=")). //modifier url
+                post(body).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+
         return 0;
     }
 
 
     @Override
-    public int postRequestChangeEmail(RequestChangementEmail request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+    public int postRequestChangeEmail(RequestChangementEmail requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+
+        OkHttpClient client=new OkHttpClient();
+        Gson gson=new Gson();
+        String json =gson.toJson(requete);
+
+        RequestBody body = RequestBody.create(JSON, json);
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/compte?agenceid=")). //modifier url
+                post(body).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+     /*   String comptesInfo="";
+
+
+        try {
+            comptesInfo=response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<CompteViewModel> comptes;
+
+        Type comptesListeType=new  TypeToken<ArrayList<CompteViewModel>>(){}.getType();
+        comptes=gson.fromJson(comptesInfo,comptesListeType);*/
+
+
+
+
         return 0;
     }
 
     @Override
-    public int postRequestChangeTelephone(RequestChangementTelephone request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+    public int postRequestChangeTelephone(RequestChangementTelephone requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+
+        OkHttpClient client=new OkHttpClient();
+        Gson gson=new Gson();
+        String json =gson.toJson(requete);
+
+        RequestBody body = RequestBody.create(JSON, json);
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/compte?agenceid=")). //modifier url
+                post(body).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
+
+
         return 0;
     }
 
     @Override
-    public int postRequestChangeMotDePasse(RequestChangementMotDePasse request) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+    public int postRequestChangeMotDePasse(RequestChangementMotDePasse requete) throws NoConnectionException, NotAuthorizedException, ErrorException, MotDePasseInvalideException {
+
+        OkHttpClient client=new OkHttpClient();
+        Gson gson=new Gson();
+        String json =gson.toJson(requete);
+
+        RequestBody body = RequestBody.create(JSON, json);
+
+        Request request=TokenRequestBuilder().
+                url(getUrl("/compte?agenceid=")). //modifier url
+                post(body).
+                build();
+        Response response=null;
+
+        try {
+            response=client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (response.code())
+        {
+            case 200: {
+                break;
+            }
+            case 404:{
+                throw new NoConnectionException();
+            }
+            case 401:{
+                throw new NotAuthorizedException();
+            }
+            default:{
+                throw  new ErrorException();
+            }
+        }
         return 0;
     }
 
