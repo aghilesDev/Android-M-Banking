@@ -1,14 +1,10 @@
 package com.example.cnep.cnepe_banking.Models;
 
-import android.os.Parcelable;
-
-import java.util.Collection;
-
 /**
  * Created by Aghiles on 2017-03-26.
  */
 
-public abstract class User  {
+public class User  {
 
     private String userId;
     private int type ;

@@ -1,13 +1,5 @@
 package com.example.cnep.cnepe_banking.Models;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-
-import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContractMouvements;
-
-import java.util.ArrayList;
-
 /**
  * Created by Aghiles on 2017-04-19.
  */
@@ -16,9 +8,9 @@ public class MouvementViewModel {
 
     private String date;
     private String intitule;
-    private float montant;
+    private double montant;
 
-    public MouvementViewModel(String date, String intitule, float montant) {
+    public MouvementViewModel(String date, String intitule, double montant) {
         this.date = date;
         this.intitule = intitule;
         this.montant = montant;
@@ -32,7 +24,7 @@ public class MouvementViewModel {
         return intitule;
     }
 
-    public float getMontant() {
+    public double getMontant() {
         return montant;
     }
 }

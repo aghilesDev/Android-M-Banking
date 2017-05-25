@@ -44,7 +44,7 @@ public class WebAPIService implements IService {
 
     private static WebAPIService instance;
     private ResponseLogin logInformation;
-    private String baseUrl="http://192.168.1.6:5454/";
+    private String baseUrl="http://192.168.1.5:5454/";
     private static MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     private WebAPIService() {
         logInformation= new ResponseLogin("");
@@ -163,11 +163,11 @@ public class WebAPIService implements IService {
     }
 
     @Override
-    public ArrayList<MouvementViewModel> getMouvements(String rib) throws NoConnectionException, NotAuthorizedException, ErrorException {
+    public ArrayList<MouvementViewModel> getMouvements(int idCompte) throws NoConnectionException, NotAuthorizedException, ErrorException {
         OkHttpClient client=new OkHttpClient();
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/Agence/all")).
+                url(getUrl("/mouvement?idcompte="+idCompte)).
                 build();
         Response response=null;
 
@@ -461,7 +461,7 @@ public class WebAPIService implements IService {
         OkHttpClient client=new OkHttpClient();
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/Agence/all")).
+                url(getUrl("/user")).
                 build();
         Response response=null;
 
@@ -514,7 +514,6 @@ public class WebAPIService implements IService {
                 break;
             }
         }
-
 
         return user;
     }

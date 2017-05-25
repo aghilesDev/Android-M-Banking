@@ -12,7 +12,7 @@ public interface ContractMouvements {
 
     public interface ActionView extends ContratLoged.ActionView
     {
-        public void onIntialRequest(String numeroCompte);
+        public void onIntialRequest(int numeroCompte);
     }
     public interface View extends ContratLoged.View
     {

@@ -31,7 +31,7 @@ public class ListMouvementInteractor implements IListMouvementInteractor{
 
 
     @Override
-    public void loadMouvementsRequest(final String numeroCompte) {
+    public void loadMouvementsRequest(final int numeroCompte) {
 
 
         new AsyncTask<Void, Void, Void>( ) {

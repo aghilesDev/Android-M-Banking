@@ -7,20 +7,26 @@ import java.io.Serializable;
  */
 
 public class CompteViewModel implements Serializable{
+    public int id;
     public String compteId;
     public String rib;
-    public String type;
+    public String typeCompte;
     public String DateMaj;
     public double solde;
     private boolean commande;
 
-    public CompteViewModel(String compteId, String rib, String type, String DateMaj , double solde, boolean commande) {
+    public CompteViewModel(int id,String compteId, String rib, String type, String DateMaj , double solde, boolean commande) {
+        this.id = id;
         this.compteId = compteId;
         this.rib = rib;
-        this.type = type;
+        this.typeCompte = type;
         this.DateMaj=DateMaj;
         this.solde = solde;
         this.commande=commande;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public boolean isCommande() {
@@ -36,7 +42,7 @@ public class CompteViewModel implements Serializable{
     }
 
     public String getType() {
-        return type;
+        return typeCompte;
     }
 
     public double getSolde() {

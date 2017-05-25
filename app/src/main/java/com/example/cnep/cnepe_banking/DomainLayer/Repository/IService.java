@@ -31,7 +31,7 @@ public interface IService {
 
     public ArrayList<CompteViewModel> getUserComptes(int codeAgence) throws NoConnectionException,NotAuthorizedException,ErrorException;
     public CompteViewModel getCompte(String rib) throws NoConnectionException,NotAuthorizedException,ErrorException;
-    public ArrayList<MouvementViewModel> getMouvements(String rib)throws NoConnectionException,NotAuthorizedException,ErrorException;
+    public ArrayList<MouvementViewModel> getMouvements(int idCompte)throws NoConnectionException,NotAuthorizedException,ErrorException;
     public ArrayList<String> getWilayas() throws NoConnectionException,ErrorException;
     public ResponseAllAgences getAllAgences(int page) throws NoConnectionException,ErrorException;//type de retour a modifier
     public ResponseAllAgences getAllAgences(String wilaya,int page) throws NoConnectionException,ErrorException;

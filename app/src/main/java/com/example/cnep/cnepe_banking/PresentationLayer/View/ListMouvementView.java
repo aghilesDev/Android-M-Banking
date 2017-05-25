@@ -19,6 +19,8 @@ import com.example.cnep.cnepe_banking.R;
 
 import java.util.ArrayList;
 
+import static com.example.cnep.cnepe_banking.R.id.compteId;
+
 /**
  * Created by Aghiles on 2017-04-19.
  */
@@ -39,7 +41,7 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
         rv=(RecyclerView)findViewById(R.id.ListMouvement);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        String compteId=getIntent().getStringExtra("compteId");
+        int compteId= getIntent().getIntExtra("compteId",0);
         Toast.makeText(getApplicationContext(),"numero de compte: "+compteId,Toast.LENGTH_SHORT).show();
         this.adapter=new MouvementAdapter(ListMouvementView.this);
         rv.setAdapter(adapter);
@@ -74,7 +76,7 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
         rv.setVisibility(View.GONE);
         noConnection.setVisibility(View.GONE);
         progress.setVisibility(View.VISIBLE);
-        presenter.onIntialRequest("ddd");
+        presenter.onIntialRequest(compteId);
 
 
     }
@@ -101,6 +103,5 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
         Intent intent=new Intent(this,LoginView.class);
         startActivity(intent);
         finishAffinity();
-
     }
 }

@@ -132,11 +132,11 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
         this.solde.setText(compte.getSolde()+" DZD");
         this.DateMaj.setText(compte.getDateMaj());
         boolean commandable=false;
-        if (compte.type.contains("EPARGNE")) {
+        if (compte.typeCompte.equalsIgnoreCase("éPARGNE")) {
             bCommande.setText("COMMANDE Carte");
             commandable=true;
         }else
-            if(compte.type.equalsIgnoreCase("CHEQUE"))
+            if(compte.typeCompte.equalsIgnoreCase("CHèQUE"))
             {
                 bCommande.setText("COMMANDE CHEQUIER");
                 commandable=true;
@@ -201,11 +201,11 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
                 String commande="";
                 int typeCompte=0;
 
-                if (compte.type.contains("EPARGNE")) {
+                if (compte.typeCompte.equalsIgnoreCase("éPARGNE")) {
                     commande="carte épargne";
                     typeCompte= RequestCommande._CARTE;
                 }else
-                if(compte.type.equalsIgnoreCase("CHEQUE"))
+                if(compte.typeCompte.equalsIgnoreCase("CHèQUE"))
                 {
                     commande="chéquier";
                     typeCompte= RequestCommande._CHEQUE;
@@ -223,7 +223,7 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
             case R.id.bMouvement:
                 Intent it=new Intent(this, ListMouvementView.class);
 
-                it.putExtra("compteId",compte.getCompteId());
+                it.putExtra("compteId",compte.getId());
 
                 startActivity(it);
             {
@@ -284,9 +284,6 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-
-
-
 
     }
 }

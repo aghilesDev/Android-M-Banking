@@ -26,7 +26,7 @@ public class ListMouvementPresenter extends BasePresenter<ContractMouvements.Vie
     }
 
     @Override
-    public void onIntialRequest(String numeroCompte) {
+    public void onIntialRequest(int numeroCompte) {
 
         interactor.loadMouvementsRequest(numeroCompte);
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public interface IListMouvementInteractor extends ILogedInteractor{
-    public void loadMouvementsRequest(String numeroCompte);
+    public void loadMouvementsRequest(int numeroCompte);
 
     public interface CallBack extends ILogedInteractor.CallBack
     {
