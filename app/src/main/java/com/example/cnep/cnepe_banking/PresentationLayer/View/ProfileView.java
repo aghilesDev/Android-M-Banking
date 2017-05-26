@@ -2,7 +2,6 @@ package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IProfilInteractor;
 import com.example.cnep.cnepe_banking.Models.RequestChangementInformation;
 import com.example.cnep.cnepe_banking.Models.User;
 import com.example.cnep.cnepe_banking.Models.UserMoral;
@@ -240,6 +238,7 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
             }
             default:
             {
+                initialize();
                 break;
             }
 

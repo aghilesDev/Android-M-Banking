@@ -10,11 +10,11 @@ public abstract class RequestCommande {
     public final static int _CARTE=2;
 
 
-    private  String rib;
+    private  int rib;
     private String motDePasse;
     private int type;
 
-    public RequestCommande(String motDePasse,String rib,int type) {
+    public RequestCommande(String motDePasse,int rib,int type) {
         this.motDePasse = motDePasse;
         this.rib=rib;
         this.type = type;

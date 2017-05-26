@@ -5,7 +5,7 @@ package com.example.cnep.cnepe_banking.Models;
  */
 
 public class RequestCommandeCheque extends RequestCommande {
-    public RequestCommandeCheque(String rib,String motDePasse) {
+    public RequestCommandeCheque(int rib,String motDePasse) {
         super(motDePasse,rib,_CHEQUE);
     }
 }

@@ -261,9 +261,9 @@ public class CompteDetailledView extends AppCompatActivity implements ContratCom
                dialog.cancel();
                RequestCommande requete;
                if (typeCompte==RequestCommande._CARTE)
-                   requete=new RequestCommandeCarte(compte.getRib(),motDePasse);
+                   requete=new RequestCommandeCarte(compte.getId(),motDePasse);
                    else
-                   requete=new RequestCommandeCheque(compte.getRib(),motDePasse);
+                   requete=new RequestCommandeCheque(compte.getId(),motDePasse);
                presenter.actionCommande(requete);
                motDePasse="";
 

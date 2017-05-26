@@ -163,11 +163,11 @@ public class WebAPIService implements IService {
     }
 
     @Override
-    public ArrayList<MouvementViewModel> getMouvements(int idCompte) throws NoConnectionException, NotAuthorizedException, ErrorException {
+    public ArrayList<MouvementViewModel> getMouvements(int idcompte) throws NoConnectionException, NotAuthorizedException, ErrorException {
         OkHttpClient client=new OkHttpClient();
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/mouvement?idcompte="+idCompte)).
+                url(getUrl("/mouvement?idcompte="+idcompte)).
                 build();
         Response response=null;
 
@@ -199,7 +199,7 @@ public class WebAPIService implements IService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.i("TEST", mouvementsInfo);
         ArrayList<MouvementViewModel> mouvements;
 
         Type mouvementsListeType=new  TypeToken<ArrayList<MouvementViewModel>>(){}.getType();
@@ -414,7 +414,7 @@ public class WebAPIService implements IService {
         OkHttpClient client=new OkHttpClient();
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/Agence/all")).
+                url(getUrl("/Credit")).
                 build();
         Response response=null;
 
@@ -527,7 +527,7 @@ public class WebAPIService implements IService {
         RequestBody body = RequestBody.create(JSON, json);
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/compte?agenceid=")). //modifier url
+                url(getUrl("/compte/cheque")). //modifier url
                 post(body).
                 build();
         Response response=null;
@@ -566,7 +566,7 @@ public class WebAPIService implements IService {
         RequestBody body = RequestBody.create(JSON, json);
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/compte?agenceid=")). //modifier url
+                url(getUrl("/compte/carte")). //modifier url
                 post(body).
                 build();
         Response response=null;
@@ -606,7 +606,7 @@ public class WebAPIService implements IService {
         RequestBody body = RequestBody.create(JSON, json);
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/compte?agenceid=")). //modifier url
+                url(getUrl("/user/mail")). //modifier url
                 post(body).
                 build();
         Response response=null;
@@ -657,11 +657,11 @@ public class WebAPIService implements IService {
         OkHttpClient client=new OkHttpClient();
         Gson gson=new Gson();
         String json =gson.toJson(requete);
-
+        Log.i("TEST",json);
         RequestBody body = RequestBody.create(JSON, json);
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/compte?agenceid=")). //modifier url
+                url(getUrl("/user/Tel")). //modifier url
                 post(body).
                 build();
         Response response=null;
@@ -701,7 +701,7 @@ public class WebAPIService implements IService {
         RequestBody body = RequestBody.create(JSON, json);
 
         Request request=TokenRequestBuilder().
-                url(getUrl("/compte?agenceid=")). //modifier url
+                url(getUrl("/user/mdp")). //modifier url
                 post(body).
                 build();
         Response response=null;

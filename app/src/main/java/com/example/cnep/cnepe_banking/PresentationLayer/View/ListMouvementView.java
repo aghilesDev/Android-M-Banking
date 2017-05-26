@@ -19,7 +19,6 @@ import com.example.cnep.cnepe_banking.R;
 
 import java.util.ArrayList;
 
-import static com.example.cnep.cnepe_banking.R.id.compteId;
 
 /**
  * Created by Aghiles on 2017-04-19.
@@ -31,6 +30,7 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
     private RecyclerView rv;
     private Button noConnection;
     private ProgressBar progress;
+    private int compteId;
 
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
         rv=(RecyclerView)findViewById(R.id.ListMouvement);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        int compteId= getIntent().getIntExtra("compteId",0);
+        compteId= getIntent().getIntExtra("compteId",0);
         Toast.makeText(getApplicationContext(),"numero de compte: "+compteId,Toast.LENGTH_SHORT).show();
         this.adapter=new MouvementAdapter(ListMouvementView.this);
         rv.setAdapter(adapter);
