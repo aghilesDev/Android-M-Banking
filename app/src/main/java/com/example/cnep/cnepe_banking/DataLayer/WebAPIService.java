@@ -217,24 +217,27 @@ public static WebAPIService newInstance()
 
     @Override
     public ArrayList<String> getWilayas() throws NoConnectionException, ErrorException {
+
         OkHttpClient client=new OkHttpClient();
-
-        Request request=TokenRequestBuilder().
-                url(getUrl("/Agence/all")).
-                build();
+        Request request= new Request.Builder()
+                .url(getUrl("Agence/all"))//ajouter la page
+                .build();
         Response response=null;
-
         try {
-            response=client.newCall(request).execute();
+            response= client.newCall(request).execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new NoConnectionException();
         }
+
+
+
         switch (response.code())
         {
             case 200: {
                 break;
             }
             case 404:{
+                Log.i("test","alors");
                 throw new NoConnectionException();
             }
             default:{
@@ -261,7 +264,7 @@ public static WebAPIService newInstance()
 
     @Override
     public ResponseAllAgences getAllAgences(int page) throws NoConnectionException, ErrorException {
-
+        Log.i("test","alors");
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
                 .url(getUrl("Agence/all"))//ajouter la page
@@ -284,7 +287,7 @@ public static WebAPIService newInstance()
             }
         }
 
-
+Log.i("test","alors");
 
         Gson gson= new Gson();
         ResponseAllAgences responseAllAgences=null;
