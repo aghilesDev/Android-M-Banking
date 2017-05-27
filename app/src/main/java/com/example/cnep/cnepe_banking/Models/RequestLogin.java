@@ -32,16 +32,16 @@ public class RequestLogin {
 
     public boolean isValideMotDepasse()
     {
-        return true;
+        return motDePasse.length()>=0;
     }
     public boolean isValideIdentifiant()
     {
-        return true;
+        return identifiant.isEmpty()==false;
     }
 
     public boolean isValide()
     {
-        return true;
+        return isValideIdentifiant()&&isValideMotDepasse();
     }
 
     public boolean isComplete()

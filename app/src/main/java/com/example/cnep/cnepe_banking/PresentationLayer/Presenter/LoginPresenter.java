@@ -28,8 +28,10 @@ public class LoginPresenter extends BasePresenter<ContractLogin.View> implements
     @Override
     public void attempToLogin(RequestLogin requestLogin) {
 
-        System.out.println("hey");
+        if(requestLogin.isValide())
         interactor.loginCase(requestLogin);
+        else
+            view.loginFailed();
     }
 
 

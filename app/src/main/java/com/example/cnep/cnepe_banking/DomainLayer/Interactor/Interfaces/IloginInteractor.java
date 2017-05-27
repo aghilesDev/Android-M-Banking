@@ -11,6 +11,7 @@ public interface IloginInteractor extends  IConnectedInteractor{
     public void loginCase(RequestLogin requestLogin);
 
 
+
     public interface CallBack extends IConnectedInteractor.CallBack{
 
         public void loginAuthorized();

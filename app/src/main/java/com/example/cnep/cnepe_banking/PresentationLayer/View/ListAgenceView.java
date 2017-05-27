@@ -127,9 +127,10 @@ public class ListAgenceView extends AppCompatActivity implements ContractAgences
 
     @Override
     public void logOut() {
-        Toast.makeText(this,"Votre session n'est plus valide",Toast.LENGTH_SHORT);
         Intent intent=new Intent(this,LoginView.class);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
         startActivity(intent);
+
         finishAffinity();
 
 

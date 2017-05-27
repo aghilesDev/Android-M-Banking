@@ -20,7 +20,7 @@ import com.example.cnep.cnepe_banking.PresentationLayer.Presenter.LoginPresenter
 import com.example.cnep.cnepe_banking.PresentationLayer.View.Interfaces.IloginView;
 import com.example.cnep.cnepe_banking.R;
 
-public class LoginView extends AppCompatActivity implements ContractLogin.View {
+public class LoginView extends AppCompatActivity implements ContractLogin.View,View.OnClickListener {
 
 
     ContractLogin.ActionView presenter=new LoginPresenter(this);
@@ -34,6 +34,7 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
     private ProgressBar progressBar;
     private CheckBox memoriserIdentifiant;
     private Button bConnexion;
+    private Button bSkip;
 
 
     @Override
@@ -57,14 +58,9 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
         progressBar=(ProgressBar)findViewById(R.id.progressBar_login);
         this.memoriserIdentifiant=(CheckBox) findViewById(R.id.memoriserIdentifiant);
         bConnexion=(Button)findViewById(R.id.connexion);
-        bConnexion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestLogin requestLogin= new RequestLogin(identifiantClient.getText().toString(),motDePasse.getText().toString());
-                waitingResponse();
-                presenter.attempToLogin(requestLogin);
-            }
-        });
+        bConnexion.setOnClickListener(this);
+        bSkip=(Button)findViewById(R.id.bSkip);
+        bSkip.setOnClickListener(this);
 
     }
 
@@ -80,6 +76,7 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
         memoriserIdentifiant.setVisibility(View.GONE);
         bConnexion.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+        bSkip.setVisibility(View.GONE);
     }
 
     public void reponseReceived()
@@ -92,6 +89,7 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
         memoriserIdentifiant.setVisibility(View.VISIBLE);
         bConnexion.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+        bSkip.setVisibility(View.VISIBLE);
 
     }
 
@@ -100,6 +98,7 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
     public void loginSucced() {
         Toast.makeText(getApplicationContext(), "login succeed", Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(LoginView.this,Accueil.class);
+        intent.putExtra("identifier",true);
         startActivity(intent);
         finish();
 
@@ -115,5 +114,24 @@ public class LoginView extends AppCompatActivity implements ContractLogin.View {
     public void noConnection() {
         reponseReceived();
         Toast.makeText(getApplicationContext(), "pas de connexion", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.connexion:{
+            RequestLogin requestLogin= new RequestLogin(identifiantClient.getText().toString(),motDePasse.getText().toString());
+            waitingResponse();
+            presenter.attempToLogin(requestLogin);
+            break;
+        }
+            case R.id.bSkip:{
+                Intent intent=new Intent(LoginView.this,Accueil.class);
+                intent.putExtra("identifier",false);
+                startActivity(intent);
+                break;
+            }
+        }
     }
 }

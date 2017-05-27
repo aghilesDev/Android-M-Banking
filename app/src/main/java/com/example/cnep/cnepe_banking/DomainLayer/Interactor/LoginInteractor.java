@@ -27,7 +27,7 @@ public class LoginInteractor implements IloginInteractor {
     public LoginInteractor(CallBack presenter)
     {
         this.presenter=presenter;
-        service= WebAPIService.getInstance();
+        service= WebAPIService.newInstance();
     }
 
     @Override

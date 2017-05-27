@@ -50,6 +50,12 @@ public class WebAPIService implements IService {
         logInformation= new ResponseLogin("");
     }
 
+public static WebAPIService newInstance()
+{
+    instance=new WebAPIService();
+    return instance;
+}
+
 
     public static WebAPIService getInstance() {
         if(instance==null)
@@ -548,6 +554,9 @@ public class WebAPIService implements IService {
             case 401:{
                 throw new NotAuthorizedException();
             }
+            case 400:{
+                throw new MotDePasseInvalideException();
+            }
             default:{
                 throw  new ErrorException();
             }
@@ -586,6 +595,9 @@ public class WebAPIService implements IService {
             }
             case 401:{
                 throw new NotAuthorizedException();
+            }
+            case 400:{
+                throw new MotDePasseInvalideException();
             }
             default:{
                 throw  new ErrorException();
@@ -626,6 +638,9 @@ public class WebAPIService implements IService {
             }
             case 401:{
                 throw new NotAuthorizedException();
+            }
+            case 400:{
+                throw new MotDePasseInvalideException();
             }
             default:{
                 throw  new ErrorException();
@@ -682,6 +697,9 @@ public class WebAPIService implements IService {
             case 401:{
                 throw new NotAuthorizedException();
             }
+            case 400:{
+            throw new MotDePasseInvalideException();
+        }
             default:{
                 throw  new ErrorException();
             }
@@ -722,6 +740,9 @@ public class WebAPIService implements IService {
             case 401:{
                 throw new NotAuthorizedException();
             }
+            case 400:{
+                throw new MotDePasseInvalideException();
+            }
             default:{
                 throw  new ErrorException();
             }
@@ -761,7 +782,7 @@ public class WebAPIService implements IService {
             case 200:{
                 break;
             }
-            case 401:{
+            case 400:{
                 throw new MotDePasseInvalideException();
             }
             case 404:{

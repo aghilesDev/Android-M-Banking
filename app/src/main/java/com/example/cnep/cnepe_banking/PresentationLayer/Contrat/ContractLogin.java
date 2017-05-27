@@ -11,6 +11,7 @@ public interface ContractLogin {
 
     public interface ActionView extends ContratConnected.ActionView
     {
+
         public void attempToLogin(RequestLogin requestLogin);
     }
 

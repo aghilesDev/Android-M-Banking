@@ -3,6 +3,7 @@ package com.example.cnep.cnepe_banking.PresentationLayer.Presenter;
 import android.view.View;
 
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.ChangementMotDePasseInteractor;
+import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IChangementMotDePasseInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IChangementinformationInteractor;
 import com.example.cnep.cnepe_banking.Models.RequestChangementMotDePasse;
 import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContratChangementinformation;
@@ -11,9 +12,9 @@ import com.example.cnep.cnepe_banking.PresentationLayer.Contrat.ContratChangemen
  * Created by Aghiles on 2017-05-09.
  */
 
-public class ChangementMotDePassePresenter extends BasePresenter<ContratChangementinformation.View>implements ContratChangementinformation.ActionView<RequestChangementMotDePasse>,IChangementinformationInteractor.CallBack{
+public class ChangementMotDePassePresenter extends BasePresenter<ContratChangementinformation.View>implements ContratChangementinformation.ActionView<RequestChangementMotDePasse>,IChangementMotDePasseInteractor.CallBack{
 
-    IChangementinformationInteractor interactor;
+    IChangementMotDePasseInteractor interactor;
 
     public ChangementMotDePassePresenter(ContratChangementinformation.View view) {
         this.interactor = new ChangementMotDePasseInteractor(this);

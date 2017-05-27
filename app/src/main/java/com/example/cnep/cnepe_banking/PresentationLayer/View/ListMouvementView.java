@@ -99,9 +99,10 @@ public class ListMouvementView extends AppCompatActivity implements ContractMouv
 
     @Override
     public void logOut() {
-        Toast.makeText(this,"Votre session n'est plus valide",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(this,LoginView.class);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
         startActivity(intent);
+
         finishAffinity();
     }
 }

@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 
 public class Accueil extends AppCompatActivity implements View.OnClickListener {
 
+    private  boolean connected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +29,14 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener {
         Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar_accueille);
         setSupportActionBar(toolbar);
         setTitle("Accueil");
-
+        connected=getIntent().getBooleanExtra("identifier",false);
         bCompte.setOnClickListener(this);
         Button bCredits=(Button)findViewById(R.id.bCredits);
         bCredits.setOnClickListener(this);
         Button bProfile=(Button)findViewById(R.id.bProfile);
         bProfile.setOnClickListener(this);
+        Button bMaps=(Button)findViewById(R.id.bMaps);
+        bMaps.setOnClickListener(this);
 
 
 
@@ -43,50 +47,91 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
 
+        if(connected) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Êtes-vous sur de vouloir quitter l'application ?");
-        builder.setCancelable(false);
-        builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finishAffinity();
-            }
-        });
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Êtes-vous sur de vouloir quitter l'application ?");
+            builder.setCancelable(false);
+            builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishAffinity();
+                }
+            });
 
-        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, final int id) {
+            builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                public void onClick(final DialogInterface dialog, final int id) {
 
-                dialog.cancel();
+                    dialog.cancel();
 
-            }
-        });
-        builder.show();
+                }
+            });
+            builder.show();
+        }else
+            super.onBackPressed();
     }
 
+    public void redirectToLogin()
+    {
+       Intent it=new Intent(Accueil.this,LoginView.class);
+        startActivity(it);
+        finishAffinity();
+
+    }
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.bComptes)
+        Intent it=null;
+
+        switch (v.getId())
         {
-            Intent it=new Intent(Accueil.this,ListAgenceView.class);
-            startActivity(it);
-        }else
-            if(v.getId()==R.id.bCredits)
-            {
-                Intent it=new Intent(Accueil.this,ListCreditView.class);
+            case R.id.bComptes:{
+
+                if(!connected)
+                    redirectToLogin();
+                else
+                {
+                it=new Intent(Accueil.this,ListAgenceView.class);
+                startActivity(it);
+                }
+            break;
+        }
+        case R.id.bCredits:{
+
+            if(!connected)
+                redirectToLogin();
+            else {
+                it = new Intent(Accueil.this, ListCreditView.class);
                 startActivity(it);
             }
-             else
-                if(v.getId()==R.id.bAgences)
-                {
-                    Intent it=new Intent(Accueil.this,ListAllAgencesView.class);
-                    startActivity(it);
-                }else
-                    if(v.getId()==R.id.bProfile)
-                    {
-                        Intent it=new Intent(Accueil.this,ProfileView.class);
-                        startActivity(it);
-                    }
+
+            break;
+        }
+        case R.id.bAgences:{
+            it=new Intent(Accueil.this,ListAllAgencesView.class);
+            startActivity(it);
+            break;
+        }
+        case R.id.bProfile:{
+            if(!connected)
+                redirectToLogin();
+            else {
+                it = new Intent(Accueil.this, ProfileView.class);
+                startActivity(it);
+            }
+            break;
+        }
+        case R.id.bMaps:{
+            it=new Intent(Accueil.this,MapsActivity.class);
+            startActivity(it);
+            break;
+        }
+
+        }
+
+
+
+
+
     }
 }

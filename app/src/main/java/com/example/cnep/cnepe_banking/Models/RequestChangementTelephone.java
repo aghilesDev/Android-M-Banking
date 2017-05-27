@@ -11,6 +11,6 @@ public class RequestChangementTelephone extends RequestChangementInformation {
 
     @Override
     public boolean informationIsValide() {
-        return true;
+        return getInformation().matches("((\\+213)|0)[0-9]{9}");
     }
 }

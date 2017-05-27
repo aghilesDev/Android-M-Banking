@@ -1,5 +1,6 @@
 package com.example.cnep.cnepe_banking.PresentationLayer.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,7 +42,7 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
         super.onCreate(savedInstanceState);
         setContentView(R.layout.changement_information);
 
-
+        typeInformation=0;
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar_changementInformation);
         setSupportActionBar(toolbar);
         setTitle("Changement "+getTypeInformation());
@@ -65,7 +66,7 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
 
     protected String  getTypeInformation()
     {
-        if(typeInformation==null)
+        if(typeInformation==0)
             typeInformation=getIntent().getIntExtra("tyeInformation",0);
 
         switch (typeInformation)
@@ -130,6 +131,9 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
 
     @Override
     public void logOut() {
+        Intent intent=new Intent(this,LoginView.class);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
+        startActivity(intent);
 
         finishAffinity();
 
@@ -139,7 +143,11 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
     public void displayRequestExecuted() {
 
        // initialize();
-        Toast.makeText(this,"modification enregistrée",Toast.LENGTH_SHORT).show();
+        String message="changement effectué";
+        if(typeInformation==RequestChangementInformation._EMAIL)
+            message+=". Veuillez confirmer votre Email";
+
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
         finish();
 
     }
@@ -175,7 +183,7 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
             }
             default:
             {
-
+                Toast.makeText(this,"Une Erreur c'est produite",Toast.LENGTH_SHORT);
                 break;
 
             }

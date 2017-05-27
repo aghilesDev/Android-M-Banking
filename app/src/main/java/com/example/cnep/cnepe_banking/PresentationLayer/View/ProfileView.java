@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cnep.cnepe_banking.Models.RequestChangementInformation;
 import com.example.cnep.cnepe_banking.Models.User;
@@ -197,7 +198,11 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
 
     @Override
     public void logOut() {
+        Intent intent=new Intent(this,LoginView.class);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
+        startActivity(intent);
 
+        finishAffinity();
     }
 
     @Override

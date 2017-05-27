@@ -16,6 +16,6 @@ public class RequestChangementEmail extends RequestChangementInformation {
 
     @Override
     public boolean informationIsValide() {
-        return true;
+        return getInformation().matches("[a-zA-Z][a-zA-Z0-9\\.-_]*[a-zA-Z0-9]@[a-zA-Z]\\.[a-z]{3}");
     }
 }
