@@ -102,7 +102,7 @@ public class ChangementMotDePasseView extends AppCompatActivity implements Contr
     public void logOut() {
 
         Intent intent=new Intent(this,LoginView.class);
-        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT).show();
         startActivity(intent);
 
         finishAffinity();

@@ -199,7 +199,7 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
     @Override
     public void logOut() {
         Intent intent=new Intent(this,LoginView.class);
-        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT).show();
         startActivity(intent);
 
         finishAffinity();
@@ -243,12 +243,13 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
             }
             default:
             {
-                initialize();
+
                 break;
             }
 
-        }
 
+        }
+        initialize();
 
     }
 }

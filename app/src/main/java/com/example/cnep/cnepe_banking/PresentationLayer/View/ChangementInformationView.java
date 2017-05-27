@@ -124,7 +124,7 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
         inforamtion.setVisibility(View.VISIBLE);
         bValider.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(this,"Pas de connexion",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Pas de connexion",Toast.LENGTH_SHORT).show();
 
 
     }
@@ -132,7 +132,7 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
     @Override
     public void logOut() {
         Intent intent=new Intent(this,LoginView.class);
-        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"votre session à expirée",Toast.LENGTH_SHORT).show();
         startActivity(intent);
 
         finishAffinity();
