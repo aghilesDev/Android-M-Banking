@@ -323,6 +323,7 @@ public static WebAPIService newInstance()
         }
 
         Log.i("TEST","wilaya :"+wilaya+" page:"+page);
+        //
 
         Gson gson= new Gson();
         ResponseAllAgences responseAllAgences=null;
