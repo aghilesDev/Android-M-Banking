@@ -164,7 +164,7 @@ public class ListAllAgencesView extends AppCompatActivity implements ContratAllA
         currentWillaya=willaya;
         this.watingData();
         adapter.clear();
-        presenter.LoadMoreAgences(currentWillaya);
+        presenter.LoadAgences(currentWillaya);
 
     }
 
