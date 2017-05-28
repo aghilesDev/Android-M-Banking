@@ -8,7 +8,6 @@ import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.ErrorException;
 import com.example.cnep.cnepe_banking.DomainLayer.Exceptions.NoConnectionException;
 import com.example.cnep.cnepe_banking.DomainLayer.Interactor.Interfaces.IListAllAgencesInteractor;
 import com.example.cnep.cnepe_banking.DomainLayer.Repository.IService;
-import com.example.cnep.cnepe_banking.Models.AgenceViewModel;
 import com.example.cnep.cnepe_banking.Models.ResponseAllAgences;
 
 import java.util.ArrayList;

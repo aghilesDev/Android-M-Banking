@@ -249,7 +249,9 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
 
 
         }
-        initialize();
+        Toast.makeText(this,"salut",Toast.LENGTH_SHORT).show();
+        watingData();
+        presenter.onInitialize();
 
     }
 }

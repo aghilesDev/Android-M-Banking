@@ -216,11 +216,11 @@ public static WebAPIService newInstance()
     }
 
     @Override
-    public ArrayList<String> getWilayas() throws NoConnectionException, ErrorException {
+        public ArrayList<String> getWilayas() throws NoConnectionException, ErrorException {
 
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
-                .url(getUrl("Agence/all"))//ajouter la page
+                .url(getUrl("/Agence/wilaya"))//ajouter la page
                 .build();
         Response response=null;
         try {
@@ -237,7 +237,7 @@ public static WebAPIService newInstance()
                 break;
             }
             case 404:{
-                Log.i("test","alors");
+                Log.i("test","alottttrs");
                 throw new NoConnectionException();
             }
             default:{
@@ -264,10 +264,10 @@ public static WebAPIService newInstance()
 
     @Override
     public ResponseAllAgences getAllAgences(int page) throws NoConnectionException, ErrorException {
-        Log.i("test","alors");
+        Log.i("test","page="+page);
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
-                .url(getUrl("Agence/all"))//ajouter la page
+                .url(getUrl("/Agence?page="+page))//ajouter la page
                 .build();
         Response response=null;
         try {
@@ -287,7 +287,6 @@ public static WebAPIService newInstance()
             }
         }
 
-Log.i("test","alors");
 
         Gson gson= new Gson();
         ResponseAllAgences responseAllAgences=null;
@@ -303,7 +302,7 @@ Log.i("test","alors");
     public ResponseAllAgences getAllAgences(String wilaya,int page) throws NoConnectionException, ErrorException {
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder()
-                .url(getUrl("Agence/all"))//ajouter la string wilayas plus la page
+                .url(getUrl("/Agence?w="+wilaya+"&page="+page))//ajouter la string wilayas plus la page
                 .build();
         Response response=null;
         try {
@@ -323,7 +322,7 @@ Log.i("test","alors");
             }
         }
 
-
+        Log.i("TEST","wilaya :"+wilaya+" page:"+page);
 
         Gson gson= new Gson();
         ResponseAllAgences responseAllAgences=null;

@@ -61,6 +61,7 @@ public class ListAllAgencesPresenter extends BasePresenter<ContratAllAgences.Vie
 
     @Override
     public void toInitialize(ArrayList<AgenceViewModel> agences, ArrayList<String> wilayas, boolean hasMore) {
+        page++;
         wilayas.add(0,"Tous");//on ajoute la possibilité d'afficher toutes les agences.
         view.Initializing(agences,wilayas,hasMore);
 
