@@ -148,6 +148,9 @@ public class ChangementInformationView extends AppCompatActivity implements Cont
             message+=". Veuillez confirmer votre Email";
 
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Intent result=new Intent();
+        result.putExtra("information",inforamtion.getText().toString());
+        setResult(RESULT_OK,result);
         finish();
 
     }

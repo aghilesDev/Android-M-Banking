@@ -44,7 +44,7 @@ public class WebAPIService implements IService {
 
     private static WebAPIService instance;
     private ResponseLogin logInformation;
-    private String baseUrl="http://192.168.1.5:5454/";
+    private String baseUrl="http://192.168.43.237:5454/";
     private static MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     private WebAPIService() {
         logInformation= new ResponseLogin("");

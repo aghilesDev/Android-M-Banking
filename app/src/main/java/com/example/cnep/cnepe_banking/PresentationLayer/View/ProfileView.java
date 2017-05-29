@@ -225,7 +225,8 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
 
                 Intent intent= new Intent(this,ChangementInformationView.class);
                 intent.putExtra("tyeInformation", RequestChangementInformation._EMAIL);
-                startActivity(intent);
+
+                startActivityForResult(intent,RequestChangementInformation._EMAIL);
                 break;
             }
             case R.id.bMotDePasseUser:
@@ -238,7 +239,7 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
             {
                 Intent intent= new Intent(this,ChangementInformationView.class);
                 intent.putExtra("tyeInformation", RequestChangementInformation._TELEPHONE);
-                startActivity(intent);
+                startActivityForResult(intent,RequestChangementInformation._TELEPHONE);
                 break;
             }
             default:
@@ -249,9 +250,30 @@ public class ProfileView extends AppCompatActivity implements ContratProfil.View
 
 
         }
-        Toast.makeText(this,"salut",Toast.LENGTH_SHORT).show();
-        watingData();
-        presenter.onInitialize();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode==RESULT_OK) {
+            String nouvelleInfo=data.getStringExtra("information");
+            switch (requestCode) {
+                case RequestChangementInformation._EMAIL: {
+
+
+                    break;
+                }
+                case RequestChangementInformation._TELEPHONE: {
+                    TextView telephone=(TextView)findViewById(R.id.telephoneUser);
+                    telephone.setText(nouvelleInfo);
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+        }
     }
 }
